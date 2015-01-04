@@ -1,0 +1,19 @@
+{
+  "name": "install-mac",
+  "version": "0.0.1",
+  "description": "Installation of dev tools on mac os",
+  "bin": "./bin/install.sh",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Yoobic/install-mac.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Yoobic/install-mac/issues"
+  },
+  "homepage": "https://github.com/Yoobic/install-mac"
+}
