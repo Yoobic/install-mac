@@ -15,6 +15,12 @@
     "email": "thaiat@ipelia.com",
     "url": "https://github.com/thaiat"
   },
+  "keywords": [
+    "mac",
+    "os",
+    "install",
+    "tools"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/Yoobic/install-mac/issues"
