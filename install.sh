@@ -66,18 +66,40 @@ brew update
 echo_title "END INSTALLING BREW"
 ############ BREW *******************
 
-############ TREE *******************
-echo_title "BEGIN INSTALLING TREE"
+############ BREW CASK *******************
+echo_title "BEGIN INSTALLING BREW"
+brew install caskroom/cask/brew-cask
+brew tap caskroom/versions
+echo_title "END INSTALLING BREW"
+############ BREW CASK *******************
+
+############ SOFTWARE *******************
+echo_title "BEGIN INSTALLING SOFTWARE"
 brew install tree
-echo_title "END INSTALLING TREE"
-############ BREW *******************
-
-############ TREE *******************
-echo_title "BEGIN INSTALLING WGET"
 brew install wget
-echo_title "END INSTALLING WGET"
-############ BREW *******************
+# browser
+#brew cask install firefox-aurora
+#brew cask install google-chrome
+#brew cask install google-chrome-canary
+#brew cask install opera-next
 
+# development
+brew cask install sublime-text3
+#brew cask install filezilla
+#brew cask install kaleidoscope
+brew cask install iterm2
+#brew cask install source-tree
+#brew cask install virtualbox
+
+# other
+brew cask install alfred
+brew cask install dropbox
+#brew cask install mou
+#brew cask install skype
+#brew cask install spotify
+#brew cask install u-torrent
+echo_title "END INSTALLING SOFTWARE"
+############ SOFTWARE *******************
 
 
 ############ NVM *******************
@@ -93,8 +115,12 @@ if [ -f "$HOME/.zshrc" ]; then
       echo_color "modifying $NVM_PROFILE" $color_yellow
       inject "nvm" "$contentNvm" ~/.zshrc
     fi
-   
+    source $NVM_PROFILE
+    nvm install 0.1O
+    nvm alias default 0.10   
 fi
+
+
 echo_title "END INSTALLING NVM"
 ############ NVM *******************
 
