@@ -1,0 +1,13 @@
+language: objective-c
+
+install:
+  - bash install.sh
+
+after_install:
+  - nvm use 0.10
+
+script:
+  - source ~/.zshrc
+  - nvm use 0.10
+  - which gulp
+  - which subl

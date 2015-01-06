@@ -49,10 +49,12 @@ clear
 
 ############ ZSH ############
 echo_title "BEGIN INSTALLING ZSH"
-curl -L http://install.ohmyz.sh | sh
-cd ~/.oh-my-zsh/custom/plugins
-git clone git://github.com/zsh-users/zsh-syntax-highlighting.git
-cd $CURRENT_DIRECTORY
+if (!$TRAVIS); then
+  curl -L http://install.ohmyz.sh | sh
+fi
+##cd ~/.oh-my-zsh/custom/plugins
+git clone git://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+##cd $CURRENT_DIRECTORY
 # forces terminal to use zsh
 #echo "\nzsh && exit 0" >> ~/.bash_profile
 #source ~/.bash_profile
@@ -61,9 +63,9 @@ echo_title "END INSTALLING ZSH"
 
 ############ BREW ############
 echo_title "BEGIN INSTALLING BREW"
-if test ! $(which brew); then
-  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-fi
+##if test ! $(which brew); then
+##  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+##fi
 brew update
 echo_title "END INSTALLING BREW"
 ############ BREW ############
@@ -162,11 +164,13 @@ echo_title "END INSTALLING NPM GLOBAL PACKAGES"
 ############ NPM ############
 
 ############ SUBLIME PACKAGE ############
+folder_sublime_packages="~/Library/Application\ Support/Sublime\ Text\ 3"
 ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin/subl
 echo_color "Install the following package for Sublime Text 3" $color_yellow
 echo_color "* Color Highlighter" $color_cyan
 echo_color "* Emmet" $color_cyan
 echo_color "* HTML-CSS-JS Prettify" $color_cyan
+#git clone https://github.com/victorporof/Sublime-HTMLPrettify.git "$folder_sublime_packages/Packages/HTML-CSS-JS Prettify"
 echo_color "* SCSS" $color_cyan
 echo_color "* SideBarEnhancements" $color_cyan
 echo_color "* SublimeLinter" $color_cyan
