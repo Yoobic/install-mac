@@ -162,6 +162,7 @@ echo_title "END INSTALLING NPM GLOBAL PACKAGES"
 ############ NPM ############
 
 ############ SUBLIME PACKAGE ############
+ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin/subl
 echo_color "Install the following package for Sublime Text 3" $color_yellow
 echo_color "* Color Highlighter" $color_cyan
 echo_color "* Emmet" $color_cyan
