@@ -1,8 +1,8 @@
 {
   "name": "install-mac",
   "version": "0.0.6",
-  "description": "Installation of dev tools on mac os",
-  "bin": "./bin/install.sh",
+  "description": "Simple bash script for installating dev tools on mac os",
+  "bin": "./install.sh",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,8 +10,18 @@
     "type": "git",
     "url": "https://github.com/Yoobic/install-mac.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": {
+    "name": "Avi Haiat",
+    "email": "thaiat@ipelia.com",
+    "url": "https://github.com/thaiat"
+  },
+  "keywords": [
+    "mac",
+    "os",
+    "install",
+    "tools"
+  ],
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/Yoobic/install-mac/issues"
   },
