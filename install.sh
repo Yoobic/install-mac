@@ -80,12 +80,14 @@ echo_title "BEGIN INSTALLING SOFTWARE"
 brew install tree
 brew install wget
 brew install imagemagick
+brew install git
+brew install python
+
 # browser
 #brew cask install firefox-aurora
 #brew cask install google-chrome
 #brew cask install google-chrome-canary
 #brew cask install opera-next
-
 # development
 brew cask install sublime-text3
 #brew cask install filezilla
@@ -93,15 +95,13 @@ brew cask install sublime-text3
 brew cask install iterm2
 #brew cask install source-tree
 #brew cask install virtualbox
-
 # other
 brew cask install alfred
 brew cask install dropbox
 #brew cask install mou
-#brew cask install skype
+brew cask install skype
 #brew cask install spotify
 #brew cask install u-torrent
-brew install git
 
 echo_title "END INSTALLING SOFTWARE"
 ############ SOFTWARE ############
@@ -118,6 +118,13 @@ brew cask install ${fonts[@]}
 echo_title "END INSTALLING FONTS"
 ############ FONTS ############
 
+############ MONGO ############
+echo_title "END INSTALLING MONGO"
+brew install mongodb
+mkdir -p /data/db
+chown -R `whoami` /data
+echo_title "END INSTALLING MONGO"
+############ MONGO ############
 
 ############ NVM ############
 echo_title "BEGIN INSTALL NVM"
@@ -155,20 +162,20 @@ echo_title "END INSTALLING NPM GLOBAL PACKAGES"
 ############ NPM ############
 
 ############ SUBLIME PACKAGE ############
-echo_color "install the following package for sublime" $color_yellow
-echo_color "Color Highlighter" $color_cyan
-echo_color "Emmet" $color_cyan
-echo_color "HTML-CSS-JS Prettify" $color_cyan
-echo_color "SCSS" $color_cyan
-echo_color "SideBarEnhancements" $color_cyan
-echo_color "SublimeLinter" $color_cyan
-echo_color "SublimeLinter-annotations" $color_cyan
-echo_color "SublimeLinter-contrib-eslint" $color_cyan
-echo_color "SublimeLinter-jshint" $color_cyan
-echo_color "SublimeLinter-jscs" $color_cyan
-echo_color "Sublime Merge Pro" $color_cyan
-echo_color "Ternjs" $color_cyan
-echo_color "Seti_UI" $color_cyan
+echo_color "Install the following package for Sublime Text 3" $color_yellow
+echo_color "* Color Highlighter" $color_cyan
+echo_color "* Emmet" $color_cyan
+echo_color "* HTML-CSS-JS Prettify" $color_cyan
+echo_color "* SCSS" $color_cyan
+echo_color "* SideBarEnhancements" $color_cyan
+echo_color "* SublimeLinter" $color_cyan
+echo_color "* SublimeLinter-annotations" $color_cyan
+echo_color "* SublimeLinter-contrib-eslint" $color_cyan
+echo_color "* SublimeLinter-jshint" $color_cyan
+echo_color "* SublimeLinter-jscs" $color_cyan
+echo_color "* Sublime Merge Pro" $color_cyan
+echo_color "* Ternjs" $color_cyan
+echo_color "* Seti_UI" $color_cyan
 
 ############ SUBLIME PACKAGE ############
 
