@@ -47,7 +47,7 @@ echo_title() {
 
 clear
 
-############ ZSH *******************
+############ ZSH ############
 echo_title "BEGIN INSTALLING ZSH"
 curl -L http://install.ohmyz.sh | sh
 cd ~/.oh-my-zsh/custom/plugins
@@ -57,26 +57,29 @@ cd $CURRENT_DIRECTORY
 #echo "\nzsh && exit 0" >> ~/.bash_profile
 #source ~/.bash_profile
 echo_title "END INSTALLING ZSH"
-############ ZSH *******************
+############ ZSH ############
 
-############ BREW *******************
+############ BREW ############
 echo_title "BEGIN INSTALLING BREW"
-ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+if test ! $(which brew); then
+  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
 brew update
 echo_title "END INSTALLING BREW"
-############ BREW *******************
+############ BREW ############
 
-############ BREW CASK *******************
+############ BREW CASK ############
 echo_title "BEGIN INSTALLING BREW"
 brew install caskroom/cask/brew-cask
 brew tap caskroom/versions
 echo_title "END INSTALLING BREW"
-############ BREW CASK *******************
+############ BREW CASK ############
 
-############ SOFTWARE *******************
+############ SOFTWARE ############
 echo_title "BEGIN INSTALLING SOFTWARE"
 brew install tree
 brew install wget
+brew install imagemagick
 # browser
 #brew cask install firefox-aurora
 #brew cask install google-chrome
@@ -98,11 +101,25 @@ brew cask install dropbox
 #brew cask install skype
 #brew cask install spotify
 #brew cask install u-torrent
+brew install git
+
 echo_title "END INSTALLING SOFTWARE"
-############ SOFTWARE *******************
+############ SOFTWARE ############
+
+############ FONTS ############
+echo_title "BEGIN INSTALLING FONTS"
+fonts=(
+  font-m-plus
+  font-clear-sans
+  font-roboto
+)
+
+brew cask install ${fonts[@]}
+echo_title "END INSTALLING FONTS"
+############ FONTS ############
 
 
-############ NVM *******************
+############ NVM ############
 echo_title "BEGIN INSTALL NVM"
 curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
 contentNvm="export NVM_DIR=\"/Users/$USER/.nvm\""
@@ -116,11 +133,43 @@ if [ -f "$HOME/.zshrc" ]; then
       inject "nvm" "$contentNvm" ~/.zshrc
     fi
     source $NVM_PROFILE
-    nvm install 0.1O
+    nvm install 0.10
     nvm alias default 0.10   
 fi
 
 
 echo_title "END INSTALLING NVM"
-############ NVM *******************
+############ NVM ############
 
+############ NPM ############
+echo_title "BEGIN INSTALLING NPM GLOBAL PACKAGES"
+npm install -g npm
+npm install -g jshint
+npm install -g eslint
+npm install -g jscs
+npm install -g gulp
+npm install -g browser-sync
+npm install -g karma
+npm install -g mocha
+echo_title "END INSTALLING NPM GLOBAL PACKAGES"
+############ NPM ############
+
+############ SUBLIME PACKAGE ############
+echo_color "install the following package for sublime" $color_yellow
+echo_color "Color Highlighter" $color_cyan
+echo_color "Emmet" $color_cyan
+echo_color "HTML-CSS-JS Prettify" $color_cyan
+echo_color "SCSS" $color_cyan
+echo_color "SideBarEnhancements" $color_cyan
+echo_color "SublimeLinter" $color_cyan
+echo_color "SublimeLinter-annotations" $color_cyan
+echo_color "SublimeLinter-contrib-eslint" $color_cyan
+echo_color "SublimeLinter-jshint" $color_cyan
+echo_color "SublimeLinter-jscs" $color_cyan
+echo_color "Sublime Merge Pro" $color_cyan
+echo_color "Ternjs" $color_cyan
+echo_color "Seti_UI" $color_cyan
+
+############ SUBLIME PACKAGE ############
+
+brew cleanup
