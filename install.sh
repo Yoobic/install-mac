@@ -59,6 +59,27 @@ cd $CURRENT_DIRECTORY
 echo_title "END INSTALLING ZSH"
 ############ ZSH *******************
 
+############ BREW *******************
+echo_title "BEGIN INSTALLING BREW"
+ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+brew update
+echo_title "END INSTALLING BREW"
+############ BREW *******************
+
+############ TREE *******************
+echo_title "BEGIN INSTALLING TREE"
+brew install tree
+echo_title "END INSTALLING TREE"
+############ BREW *******************
+
+############ TREE *******************
+echo_title "BEGIN INSTALLING WGET"
+brew install wget
+echo_title "END INSTALLING WGET"
+############ BREW *******************
+
+
+
 ############ NVM *******************
 echo_title "BEGIN INSTALL NVM"
 curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
@@ -76,3 +97,4 @@ if [ -f "$HOME/.zshrc" ]; then
 fi
 echo_title "END INSTALLING NVM"
 ############ NVM *******************
+
