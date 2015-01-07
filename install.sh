@@ -33,7 +33,7 @@ inject() {
 echo_color() {
   message=$1
   color=${2:-$color_normal}
-  printf "$color $message $color_normal\n"
+  printf "$color$message $color_normal\n"
 }
 
 # Echo a title in color 
@@ -49,7 +49,7 @@ clear
 
 ############ ZSH ############
 echo_title "BEGIN INSTALLING ZSH"
-if (!$TRAVIS); then
+if [ !"$TRAVIS" == "true" ]; then
   curl -L http://install.ohmyz.sh | sh
 fi
 ##cd ~/.oh-my-zsh/custom/plugins
@@ -153,12 +153,14 @@ echo_title "END INSTALLING NVM"
 ############ NPM ############
 echo_title "BEGIN INSTALLING NPM GLOBAL PACKAGES"
 npm install -g npm
+npm install -g bower
 npm install -g jshint
 npm install -g eslint
 npm install -g jscs
 npm install -g gulp
 npm install -g browser-sync
 npm install -g karma
+npm install -g karma-cli
 npm install -g mocha
 echo_title "END INSTALLING NPM GLOBAL PACKAGES"
 ############ NPM ############
