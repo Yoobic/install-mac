@@ -1,0 +1,9 @@
+language: objective-c
+
+install:
+  - bash install.sh
+
+script:
+  - source ~/.zshrc
+  - nvm use 0.10
+  - bash test.sh
