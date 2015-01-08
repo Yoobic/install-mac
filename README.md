@@ -1,5 +1,8 @@
-install-mac
-===========
+#install-mac
+[![Build Status](https://travis-ci.org/Yoobic/install-mac.svg?branch=master)](https://travis-ci.org/Yoobic/install-mac)
+
+## Description
+This repo contains a simple bash script that installs the dev tools for a mac.
 
 ## Installation
 To install the package run the following command:
@@ -7,7 +10,6 @@ To install the package run the following command:
 curl -L https://raw.githubusercontent.com/Yoobic/install-mac/master/install.sh | bash
 ```
 
-This repo contains a simple bash script that installs the dev tools for a mac.
 
 It will install the following:
 * brew
