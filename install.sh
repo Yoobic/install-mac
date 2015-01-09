@@ -96,7 +96,7 @@ brew cask install sublime-text3
 #brew cask install kaleidoscope
 brew cask install iterm2
 #brew cask install source-tree
-#brew cask install virtualbox
+brew cask install virtualbox
 # other
 brew cask install alfred
 brew cask install dropbox
@@ -104,9 +104,18 @@ brew cask install dropbox
 brew cask install skype
 #brew cask install spotify
 #brew cask install u-torrent
-
 echo_title "END INSTALLING SOFTWARE"
 ############ SOFTWARE ############
+
+############ DOCKER ############
+echo_title "BEGIN INSTALLING DOCKER"
+brew install docker
+brew install boot2docker
+boot2docker init
+boot2docker up
+echo_title "END INSTALLING DOCKER"
+############ DOCKER ############
+
 
 ############ FONTS ############
 echo_title "BEGIN INSTALLING FONTS"
