@@ -60,5 +60,6 @@ check_file "$(which gulp)" "gulp"
 check_file "$(which browser-sync)" "browser-sync"
 check_file "$(which karma)" "karma"
 check_file "$(which mocha)" "mocha"
+check_file "$(which boot2docker)" "boot2docker"
 
 echo_color "End test" $color_yellow
