@@ -25,6 +25,7 @@ inject() {
   echo -e "## yoobic:"$sectionName >> $fileName
   echo -e $newContent >> $fileName
   echo -e "## yoobic:"$sectionName >> $fileName
+  echo -e "\n"
 }
 
 # Echo a message in color (default to normal color)
@@ -71,10 +72,18 @@ echo_title "END INSTALLING BREW"
 ############ BREW ############
 
 ############ BREW CASK ############
-echo_title "BEGIN INSTALLING BREW"
+echo_title "BEGIN INSTALLING BREW CASK"
 brew install caskroom/cask/brew-cask
 brew tap caskroom/versions
-echo_title "END INSTALLING BREW"
+# configure cask installation in /Applications
+if [ -f "$HOME/.zshrc" ]; then
+    contentCask="export HOMEBREW_CASK_OPTS=\"--appdir=/Applications\""
+    echo $contentCask
+    inject "cask" "$contentCask" ~/.zshrc
+    source "$HOME/.zshrc"
+fi
+
+echo_title "END INSTALLING BREW CASK"
 ############ BREW CASK ############
 
 ############ SOFTWARE ############
@@ -85,25 +94,23 @@ brew install imagemagick
 brew install git
 brew install python
 
-# browser
+brew cask install sublime-text3
+brew cask install iterm2
+brew cask install virtualbox
+brew cask install alfred
+brew cask install dropbox
+brew cask install skype
+brew cask install slack
+#brew cask install spotify
+#brew cask install u-torrent
+#brew cask install source-tree
+#brew cask install mou
+#brew cask install filezilla
+#brew cask install kaleidoscope
 #brew cask install firefox-aurora
 #brew cask install google-chrome
 #brew cask install google-chrome-canary
 #brew cask install opera-next
-# development
-brew cask install sublime-text3
-#brew cask install filezilla
-#brew cask install kaleidoscope
-brew cask install iterm2
-#brew cask install source-tree
-brew cask install virtualbox
-# other
-brew cask install alfred
-brew cask install dropbox
-#brew cask install mou
-brew cask install skype
-#brew cask install spotify
-#brew cask install u-torrent
 echo_title "END INSTALLING SOFTWARE"
 ############ SOFTWARE ############
 

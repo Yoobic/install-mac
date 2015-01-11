@@ -12,7 +12,7 @@ color_white="\x1B[37m"
 
 
 if [ "$TRAVIS" == "true" ]; then
-    app_folder="/Users/travis/Applications"
+    app_folder="/Applications"
 else
     app_folder="/Applications"
 fi
@@ -37,6 +37,8 @@ check_file(){
 }
 echo_color "Start test" $color_yellow
 
+cat ~/.zshrc
+
 check_file "$(which zsh)" "zsh" # check zsh version
 check_file "$(which brew)" "brew" # check brew version
 check_file "$(which tree)" "tree" # check tree version
@@ -49,8 +51,10 @@ check_file $HOME/.zshrc
 check_file "$app_folder/Sublime Text.app" # check Sublime Text software
 check_file "$app_folder/iTerm.app" # check iTerm2 software
 #check_file "$app_folder/alfred.app" # check iTerm2 software
-#check_file "$app_folder/Dropbox.app" # check Dropbox software
+check_file "$app_folder/Dropbox.app" # check Dropbox software
 check_file "$app_folder/Skype.app" # check Skype software
+check_file "$app_folder/VirtualBox.app" # check VirtualBox software
+check_file "$app_folder/Slack.app" # check Slack software
 
 check_file "$(which npm)" "npm"
 check_file "$(which jshint)" "jsint"
