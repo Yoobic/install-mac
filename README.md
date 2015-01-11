@@ -21,10 +21,12 @@ It will install the following:
 * wget
 * imagemagick
 * iTerm2
-* alfred
-* skype
-* dropbox
+* Alfred
+* Skype
+* Dropbox
 * Sublime Text 3
+* VirtualBox
+* Slack
 * gulp
 * karma
 * mocha
