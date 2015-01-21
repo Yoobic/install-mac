@@ -5,13 +5,14 @@
 This repo contains a simple bash script that installs the dev tools for a mac.
 
 ## Prerequisites
-* Make sure you have Xcode installed
-* Make sure you have zsh or install it `$ apt-get install zsh`
-* Make sure zsh is the default shell
+* Make sure you have `Xcode` installed
+* Make sure you have `zsh` or install it
+* Make sure `zsh is the default shell
   
     ```bash
+    which zsh # this will get you the path of zsh /bin/zsh (if it is different adjust the change command with correct path)
     sudo dscl 
-    change Local/Default/Users/root UserShell /bin/bash /usr/local/bin/zsh
+    change Local/Default/Users/root UserShell /bin/bash /bin/zsh
     exit
     ```
 
@@ -47,4 +48,9 @@ It will install the following:
 * jshint
 * eslint
 * jscs
+* browserify
+* watchify
+* nodemon
+* node-inspector
+
 

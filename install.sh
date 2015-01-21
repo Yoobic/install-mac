@@ -178,6 +178,11 @@ npm install -g browser-sync
 npm install -g karma
 npm install -g karma-cli
 npm install -g mocha
+npm install -g browserify
+npm install -g watchify
+npm install -g nodemon
+npm install -g node-inspector
+npm install -g npm-check-updates
 echo_title "END INSTALLING NPM GLOBAL PACKAGES"
 ############ NPM ############
 
