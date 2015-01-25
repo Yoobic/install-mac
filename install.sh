@@ -21,11 +21,12 @@ inject() {
   # remove previous content
   sed -i.bak  '/## yoobic:'$sectionName'/,/## yoobic:'$sectionName'/d' $fileName
   # add new content
-  #echo -e "\n" >> $fileName
-  echo -e "## yoobic:"$sectionName >> $fileName
-  echo -e $newContent >> $fileName
-  echo -e "## yoobic:"$sectionName >> $fileName
-  echo -e "\n"
+
+
+  printf "%s\n" "## yoobic:"$sectionName >> $fileName
+  printf "${newContent}\n" >> $fileName
+  printf "%s\n" "## yoobic:"$sectionName >> $fileName
+  
 }
 
 # Echo a message in color (default to normal color)
@@ -64,9 +65,9 @@ echo_title "END INSTALLING ZSH"
 
 ############ BREW ############
 echo_title "BEGIN INSTALLING BREW"
-##if test ! $(which brew); then
-##  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-##fi
+if test ! $(which brew); then
+  ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+fi
 brew update
 echo_title "END INSTALLING BREW"
 ############ BREW ############
@@ -78,8 +79,7 @@ brew tap caskroom/versions
 # configure cask installation in /Applications
 if [ -f "$HOME/.zshrc" ]; then
     contentCask="export HOMEBREW_CASK_OPTS=\"--appdir=/Applications\""
-    echo $contentCask
-    inject "cask" "$contentCask" ~/.zshrc
+    inject "cask" "$contentCask" "$HOME/.zshrc"
     source "$HOME/.zshrc"
 fi
 
@@ -89,18 +89,18 @@ echo_title "END INSTALLING BREW CASK"
 ############ SOFTWARE ############
 echo_title "BEGIN INSTALLING SOFTWARE"
 brew install tree
-brew install wget
+brew install wget 
 brew install imagemagick
 brew install git
 brew install python
 
-brew cask install sublime-text3
-brew cask install iterm2
-brew cask install virtualbox
-brew cask install alfred
-brew cask install dropbox
-brew cask install skype
-brew cask install slack
+brew cask install sublime-text3 --force
+brew cask install iterm2 --force
+brew cask install virtualbox --force
+brew cask install alfred --force
+brew cask install dropbox --force
+brew cask install skype --force
+brew cask install slack --force
 #brew cask install spotify
 #brew cask install u-torrent
 #brew cask install source-tree
@@ -108,7 +108,7 @@ brew cask install slack
 #brew cask install filezilla
 #brew cask install kaleidoscope
 #brew cask install firefox-aurora
-#brew cask install google-chrome
+brew cask install google-chrome -force
 #brew cask install google-chrome-canary
 #brew cask install opera-next
 echo_title "END INSTALLING SOFTWARE"
@@ -155,7 +155,7 @@ if [ -f "$HOME/.zshrc" ]; then
       echo_color "Source string already in $NVM_PROFILE, please clean it" $color_red
     else
       echo_color "modifying $NVM_PROFILE" $color_yellow
-      inject "nvm" "$contentNvm" ~/.zshrc
+      inject "nvm" "$contentNvm" "$HOME/.zshrc"
     fi
     source $NVM_PROFILE
     nvm install 0.10
