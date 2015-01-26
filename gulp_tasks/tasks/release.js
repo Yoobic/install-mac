@@ -11,27 +11,17 @@ var stripJsonComments = require('strip-json-comments');
 var bump = $.bump;
 var tap = $.tap;
 var XML = require('node-jsxml').XML;
-var streamqueue = require('streamqueue');
 var git = $.git;
-var gulpif = $.
-if;
+var gulpif = $.if;
+var gutil = require('gulp-util');
+var GitHubApi = require('github');
+var runSequence = require('run-sequence').use(gulp);
+var del = require('del');
+var inquirer = require('inquirer');
+var Q = require('q');
+var githubUsername = require('github-username');
+var helper = require('../common/helper');
 var constants = require('../common/constants')();
-
-var readTextFile = function(filename) {
-    var body = fs.readFileSync(filename, 'utf8');
-    return body;
-};
-
-var readJsonFile = function(filename) {
-    var body = readTextFile(filename);
-    return JSON.parse(stripJsonComments(body));
-};
-
-var filterFiles = function(files, extension) {
-    return _.filter(files, function(file) {
-        return path.extname(file) === extension;
-    });
-};
 
 /**
  * Bumps any version in the constants.versionFiles
@@ -40,9 +30,10 @@ var filterFiles = function(files, extension) {
  * gulp bump --minor (or --major or --prerelease or --patch which is the default)
  * - or -
  * gulp bump --ver=1.2.3
+ * @param {function} cb - The gulp callback
  * @returns {void}
  */
-gulp.task('bump', false, function() {
+gulp.task('bump', false, function(cb) {
     var bumpType = 'patch';
     // major.minor.patch
     if(args.patch) {
@@ -60,16 +51,11 @@ gulp.task('bump', false, function() {
     bumpType = process.env.BUMP || bumpType;
 
     var version;
-    var srcjson = filterFiles(constants.versionFiles, '.json');
-    var srcxml = filterFiles(constants.versionFiles, '.xml');
-
-    // preparing the queue for bumping json and then xml files
-    var stream = streamqueue({
-        objectMode: true
-    });
+    var srcjson = helper.filterFiles(constants.versionFiles, '.json');
+    var srcxml = helper.filterFiles(constants.versionFiles, '.xml');
 
     // first we bump the json files
-    stream.queue(gulp.src(srcjson)
+    gulp.src(srcjson)
         .pipe(gulpif(args.ver !== undefined, bump({
             version: args.ver
         }), bump({
@@ -81,24 +67,30 @@ gulp.task('bump', false, function() {
                 version = json.version;
             }
         }))
-        .pipe(gulp.dest('./')));
+        .pipe(gulp.dest('./'))
+        .on('end', function() {
+            // then after we have the correct value for version, we take care of the xml files
+            if(srcxml.length > 0) {
+                gulp.src(srcxml)
+                    .pipe(tap(function(file) {
+                        var xml = new XML(String(file.contents));
+                        xml.attribute('version').setValue(version);
+                        file.contents = Buffer.concat([new Buffer(xml.toXMLString())]);
+                    }))
+                    .pipe(gulp.dest('./' + constants.clientFolder))
+                    .on('end', function() {
+                        cb();
+                    });
+            } else {
+                cb();
+            }
 
-    // then after we have the correct value for version, we take care of the xml files
-    if(srcxml.length > 0) {
-        stream.queue(gulp.src(srcxml)
-            .pipe(tap(function(file) {
-                var xml = new XML(String(file.contents));
-                xml.attribute('version').setValue(version);
-                file.contents = Buffer.concat([new Buffer(xml.toXMLString())]);
-            }))
-            .pipe(gulp.dest('./' + constants.clientFolder)));
-    }
-    return stream.done();
+        });
 
 });
 
 gulp.task('commit', false, ['bump'], function() {
-    var pkg = readJsonFile('./package.json');
+    var pkg = helper.readJsonFile('./package.json');
     var message = 'docs(changelog): version ' + pkg.version;
     return gulp.src(constants.versionFiles)
         .pipe(git.add({
@@ -107,22 +99,24 @@ gulp.task('commit', false, ['bump'], function() {
         .pipe(git.commit(message));
 });
 
-gulp.task('tag', false, ['commit'], function() {
-    var pkg = readJsonFile('./package.json');
+gulp.task('tag', false, ['commit'], function(cb) {
+    var pkg = helper.readJsonFile('./package.json');
     var v = 'v' + pkg.version;
     var message = pkg.version;
     git.tag(v, message, function(err) {
         if(err) {
             throw new Error(err);
         }
+        cb();
     });
 });
 
-gulp.task('push', false, ['tag'], function() {
+gulp.task('push', false, ['tag'], function(cb) {
     exec('git push origin master  && git push origin master --tags', function(err) {
         if(err) {
             throw new Error(err);
         }
+        cb();
     });
 });
 
@@ -133,3 +127,113 @@ gulp.task('push', false, ['tag'], function() {
 // });
 
 gulp.task('release', 'Publish a new release version.', ['push']);
+
+// ############GITHUB SECTION#########
+
+var github = new GitHubApi({
+    version: '3.0.0',
+    protocol: 'https',
+    timeout: 5000
+});
+
+var gitGetEmailAsync = Q.nbind(git.exec, git, {
+    args: 'config --get user.email',
+    quiet: true
+});
+
+var githubUsernameAsync = Q.nfbind(githubUsername);
+
+var inquireAsync = function(result) {
+    var deferred = Q.defer();
+    inquirer.prompt(result.questions, function(answers) {
+        // only resolving what we need
+        deferred.resolve({
+            username: answers.username || result.username,
+            password: answers.password
+        });
+    });
+    return deferred.promise;
+};
+
+var githubAuthSetupAndTestAsync = function(result) {
+    var deferred = Q.defer();
+    github.authenticate({
+        type: 'basic',
+        username: result.username,
+        password: result.password
+    });
+    github.misc.rateLimit({}, function(err, res) {
+        if(err) {
+            deferred.reject(gutil.colors.red('GitHub auth failed! ') + 'Response from server: ' + gutil.colors.yellow(JSON.parse(err).message));
+        }
+        deferred.resolve(gutil.colors.green('GitHub auth successful!'));
+    });
+    return deferred.promise;
+};
+
+gulp.task('githubAuth', false, function(cb) {
+    return gitGetEmailAsync()
+        .then(githubUsernameAsync)
+        .then(function(username) {
+            return {
+                username: username,
+                questions: [{
+                    type: 'input',
+                    message: 'Please enter your GitHub username',
+                    name: 'username',
+                    default: username,
+                    validate: function(input) {
+                        return input !== '';
+                    },
+                    when: function() {
+                        return username === null;
+                    }
+                }, {
+                    type: 'password',
+                    message: 'Please enter your GitHub password',
+                    name: 'password',
+                    validate: function(input) {
+                        return input !== '';
+                    }
+                }]
+            };
+        })
+        .then(inquireAsync)
+        .then(githubAuthSetupAndTestAsync)
+        .tap(gutil.log);
+});
+
+gulp.task('release:createRelease', false, function(cb) {
+    var pkg = helper.readJsonFile('./package.json');
+    var v = 'v' + pkg.version;
+    var message = pkg.version;
+    var ownerRepo = constants.repository.split('/').slice(-2);
+
+    return gulp.src('CHANGELOG.md')
+        .pipe(tap(function(file) {
+            var body = file.contents.toString();
+            body = body.slice(body.indexOf('###'));
+            var msg = {
+                owner: ownerRepo[0],
+                repo: ownerRepo[1],
+                tag_name: v,
+                name: v + ': version ' + message,
+                body: body
+            };
+            github.releases.createRelease(msg, function(err, res) {
+                if(err) {
+                    gutil.log(gutil.colors.red('Error: ' + err));
+                } else {
+                    del('CHANGELOG.md');
+                }
+            });
+        }));
+});
+
+gulp.task('delay', false, function(cb) {
+    setTimeout(cb, 1000);
+});
+
+gulp.task('release:full', 'Publish a new release version on GitHub and upload a changelog.', function() {
+    return runSequence('githubAuth', 'changelog', 'push', 'delay', 'release:createRelease');
+});
