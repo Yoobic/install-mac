@@ -9,17 +9,18 @@ This repo contains a simple bash script that installs the dev tools for a mac.
 * Make sure `zsh` is the default shell
   
     ```bash
-    which zsh # this will get you the path of zsh /bin/zsh (if it is different adjust the change command with correct path)
-    sudo dscl 
-    change Local/Default/Users/root UserShell /bin/bash /bin/zsh
-    exit
+    sudo dscl localonly -changei /Local/Default/Users/root UserShell 1 $(which zsh)
     ```
 * Restart the computer
 * Install oh-my-zsh
+
     ```bash
-    curl -L http://install.ohmyzsh.sh | sh
+    curl -L http://install.ohmyz.sh | sh
     ```
-The installation might stop if XCode is not installed. Once XCode has completed, re-run the command
+
+    The installation will launch the installation of `XCode tools` if it is not installed. On the popup window press `Install` 
+
+    Once `XCode tools` installation has completed, re-run the command for installing `oh-my-zsh`
 
 ## Installation
 To install the package run the following command:
@@ -55,5 +56,8 @@ It will install the following:
 * watchify
 * nodemon
 * node-inspector
+* cordova
+* phonegap
+* ionic
 
 
