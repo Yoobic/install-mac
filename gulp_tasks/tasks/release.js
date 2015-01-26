@@ -133,7 +133,7 @@ gulp.task('release', 'Publish a new release version.', ['push']);
 var github = new GitHubApi({
     version: '3.0.0',
     protocol: 'https',
-    timeout: 5000
+    timeout: 0
 });
 
 var gitGetEmailAsync = Q.nbind(git.exec, git, {
@@ -164,9 +164,10 @@ var githubAuthSetupAndTestAsync = function(result) {
     });
     github.misc.rateLimit({}, function(err, res) {
         if(err) {
-            deferred.reject(gutil.colors.red('GitHub auth failed! ') + 'Response from server: ' + gutil.colors.yellow(JSON.parse(err).message));
-        }
-        deferred.resolve(gutil.colors.green('GitHub auth successful!'));
+            deferred.reject(gutil.colors.red('Github api failed! ') + ' Response from server: ' + gutil.colors.yellow(err.message));
+            deferred.reject(err.message);
+            }
+        deferred.resolve(gutil.colors.green('Github authentication successful!'));
     });
     return deferred.promise;
 };
@@ -174,6 +175,9 @@ var githubAuthSetupAndTestAsync = function(result) {
 gulp.task('githubAuth', false, function(cb) {
     return gitGetEmailAsync()
         .then(githubUsernameAsync)
+        .fail(function() {
+            return null;
+        })
         .then(function(username) {
             return {
                 username: username,
