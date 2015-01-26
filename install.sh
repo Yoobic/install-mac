@@ -183,6 +183,9 @@ npm install -g watchify
 npm install -g nodemon
 npm install -g node-inspector
 npm install -g npm-check-updates
+npm install -g cordova
+npm install -g phonegap
+npm install -g ionic
 echo_title "END INSTALLING NPM GLOBAL PACKAGES"
 ############ NPM ############
 
@@ -206,5 +209,9 @@ echo_color "* Ternjs" $color_cyan
 echo_color "* Seti_UI" $color_cyan
 
 ############ SUBLIME PACKAGE ############
+
+############ GIT ALIASES ############
+curl -L https://raw.githubusercontent.com/thaiat/generator-sublime/master/templates/app/bin/git-config.sh | sh
+############# GIT ALIASES ############
 
 brew cleanup

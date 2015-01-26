@@ -55,6 +55,7 @@ check_file "$app_folder/Dropbox.app" # check Dropbox software
 check_file "$app_folder/Skype.app" # check Skype software
 check_file "$app_folder/VirtualBox.app" # check VirtualBox software
 check_file "$app_folder/Slack.app" # check Slack software
+check_file "$app_folder/Google Chrome.app" # check Google Chrome software
 
 check_file "$(which npm)" "npm"
 check_file "$(which jshint)" "jsint"
@@ -69,6 +70,9 @@ check_file "$(which watchify)" "watchify"
 check_file "$(which nodemon)" "nodemon"
 check_file "$(which node-inspector)" "node-inspector"
 check_file "$(which npm-check-updates)" "npm-check-updates"
+check_file "$(which cordova)" "cordova"
+check_file "$(which phonegap)" "phonegap"
+check_file "$(which ionic)" "ionic"
 check_file "$(which boot2docker)" "boot2docker"
 
 echo_color "End test" $color_yellow
