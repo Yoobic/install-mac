@@ -5,9 +5,8 @@
 This repo contains a simple bash script that installs the dev tools for a mac.
 
 ## Prerequisites
-* Make sure you have `Xcode` installed
-* Make sure you have `zsh` or install it
-* Make sure `zsh is the default shell
+* Make sure you have `zsh`
+* Make sure `zsh` is the default shell
   
     ```bash
     which zsh # this will get you the path of zsh /bin/zsh (if it is different adjust the change command with correct path)
@@ -15,8 +14,12 @@ This repo contains a simple bash script that installs the dev tools for a mac.
     change Local/Default/Users/root UserShell /bin/bash /bin/zsh
     exit
     ```
-
-
+* Restart the computer
+* Install oh-my-zsh
+    ```bash
+    curl -L http://install.ohmyzsh.sh | sh
+    ```
+The installation might stop if XCode is not installed. Once XCode has completed, re-run the command
 
 ## Installation
 To install the package run the following command:
