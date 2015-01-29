@@ -1,6 +1,6 @@
 {
   "name": "install-mac",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Simple bash script for installating dev tools on mac os",
   "bin": "./install.sh",
   "scripts": {
