@@ -204,7 +204,7 @@ echo_color "* SublimeLinter-annotations" $color_cyan
 echo_color "* SublimeLinter-contrib-eslint" $color_cyan
 echo_color "* SublimeLinter-jshint" $color_cyan
 echo_color "* SublimeLinter-jscs" $color_cyan
-echo_color "* Sublime Merge Pro" $color_cyan
+echo_color "* Sublimerge Pro" $color_cyan
 echo_color "* Ternjs" $color_cyan
 echo_color "* Seti_UI" $color_cyan
 
