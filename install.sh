@@ -207,6 +207,7 @@ echo_color "* SublimeLinter-jscs" $color_cyan
 echo_color "* Sublimerge Pro" $color_cyan
 echo_color "* Ternjs" $color_cyan
 echo_color "* Seti_UI" $color_cyan
+echo_color "* Cobalt2" $color_cyan
 
 ############ SUBLIME PACKAGE ############
 
