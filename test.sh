@@ -56,6 +56,7 @@ check_file "$app_folder/Skype.app" # check Skype software
 check_file "$app_folder/VirtualBox.app" # check VirtualBox software
 check_file "$app_folder/Slack.app" # check Slack software
 check_file "$app_folder/Google Chrome.app" # check Google Chrome software
+check_file "$app_folder/LimeChat.app" # check Lime Chat software
 
 check_file "$(which npm)" "npm"
 check_file "$(which jshint)" "jsint"

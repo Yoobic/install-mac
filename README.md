@@ -45,6 +45,7 @@ It will install the following:
 * Sublime Text 3
 * VirtualBox
 * Slack
+* LimeChat
 * gulp
 * karma
 * mocha
