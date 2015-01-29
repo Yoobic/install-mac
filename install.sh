@@ -101,6 +101,7 @@ brew cask install alfred --force
 brew cask install dropbox --force
 brew cask install skype --force
 brew cask install slack --force
+brew cask install limechat --force
 #brew cask install spotify
 #brew cask install u-torrent
 #brew cask install source-tree
@@ -122,19 +123,6 @@ boot2docker init
 boot2docker up
 echo_title "END INSTALLING DOCKER"
 ############ DOCKER ############
-
-
-############ FONTS ############
-echo_title "BEGIN INSTALLING FONTS"
-fonts=(
-  font-m-plus
-  font-clear-sans
-  font-roboto
-)
-
-brew cask install ${fonts[@]}
-echo_title "END INSTALLING FONTS"
-############ FONTS ############
 
 ############ MONGO ############
 echo_title "END INSTALLING MONGO"
@@ -165,6 +153,18 @@ fi
 
 echo_title "END INSTALLING NVM"
 ############ NVM ############
+
+############ FONTS ############
+echo_title "BEGIN INSTALLING FONTS"
+fonts=(
+  font-m-plus
+  font-clear-sans
+  font-roboto
+)
+brew tap caskroom/fonts 
+brew cask install ${fonts[@]}
+echo_title "END INSTALLING FONTS"
+############ FONTS ############
 
 ############ NPM ############
 echo_title "BEGIN INSTALLING NPM GLOBAL PACKAGES"
