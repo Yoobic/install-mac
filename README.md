@@ -31,7 +31,6 @@ curl -L https://raw.githubusercontent.com/Yoobic/install-mac/master/install.sh |
 
 It will install the following:
 * brew
-* zsh
 * mongo
 * nvm (node)
 * git
