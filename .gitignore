@@ -52,3 +52,6 @@ plugins/
 
 # Changelog
 CHANGELOG.md
+
+#Test File
+install_test.sh
