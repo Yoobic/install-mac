@@ -4,6 +4,8 @@
 ## Description
 This repo contains a simple bash script that installs the dev tools for a mac.
 
+![install-mac](https://cloud.githubusercontent.com/assets/4806944/5983453/368a062e-a8d6-11e4-873a-29f303efcbf6.png)
+
 ## Prerequisites
 * Make sure you have `zsh` (normally it is installed by default on every mac, check with `which zsh`)
 * Make sure `zsh` is the default shell
