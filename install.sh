@@ -47,6 +47,43 @@ echo_title() {
   echo_color "$message" "$color"
 }
 
+inquirer_software() {
+  if [ "$TRAVIS" == "true" ]; then
+    choice="all"
+  else
+   cmd=(dialog --backtitle "Select your stack" \
+              --title "Your stack" --clear \
+              --checklist "Select your favorite softwares  " 20 61 15)
+
+    options=("Alfred" "Alfred" on
+           "Docker" "Docker" on
+           "Dropbox" "Dropbox" on
+           "Fonts" "Fonts (m-plus, clear-sans, roboto)" on
+           "GoogleChrome" "Google Chrome" on
+           "iTerm2" "iTerm2" on
+           "LimeChat" "LimeChat" on
+           "Mongo" "Mongodb" on
+           "Skype" "Skype" on
+           "Slack" "Slack" on
+           "SublimeText3" "Sublime Text 3" on
+           "VirtualBox" "Virtual Box" on
+           "Gulp" "gulp" on
+           "Grunt" "grunt" on
+           "BrowserSync" "browser-sync" on
+           "Karma" "karma" on
+           "Mocha" "mocha" on
+           "Browserify" "browserify" on
+           "Nodemon" "nodemon" on
+           "NodeInspector" "node-inspector" on
+           "NpmCheckUpdates" "npm-check-updates" on
+           "Cordova" "Cordova" on
+           )
+
+    choice=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+
+  fi
+}
+
 clear
 
 ############ ZSH ############
@@ -86,6 +123,17 @@ fi
 echo_title "END INSTALLING BREW CASK"
 ############ BREW CASK ############
 
+############ DIALOG ############
+brew install dialog
+inquirer_software
+if [[ $choice == "" ]]
+then
+  echo "Your stack is empty, nothing to install, exiting...";
+  exit
+fi 
+############ DIALOG ############
+
+
 ############ SOFTWARE ############
 echo_title "BEGIN INSTALLING SOFTWARE"
 brew install tree
@@ -94,14 +142,30 @@ brew install imagemagick
 brew install git
 brew install python
 
-brew cask install sublime-text3 --force
-brew cask install iterm2 --force
-brew cask install virtualbox --force
-brew cask install alfred --force
-brew cask install dropbox --force
-brew cask install skype --force
-brew cask install slack --force
-brew cask install limechat --force
+if ([[ $choice == *"all"* ]] || [[ $choice == "SublimeText3" ]]); then
+  brew cask install sublime-text3 --force
+fi
+if ([[ $choice == *"all"* ]] || [[ $choice == "iTerm2" ]]); then
+  brew cask install iterm2 --force
+fi
+if ([[ $choice == *"all"* ]] || [[ $choice == "VirtualBox" ]]); then
+  brew cask install virtualbox --force
+fi
+if ([[ $choice == *"all"* ]] || [[ $choice == "Alfred" ]]); then
+  brew cask install alfred --force
+fi
+if ([[ $choice == *"all"* ]] || [[ $choice == "Dropbox" ]]); then
+  brew cask install dropbox --force
+fi
+if ([[ $choice == *"all"* ]] || [[ $choice == "Skype" ]]); then
+  brew cask install skype --force
+fi
+if ([[ $choice == *"all"* ]] || [[ $choice == "Slack" ]]); then
+  brew cask install slack --force
+fi
+if ([[ $choice == *"all"* ]] || [[ $choice == "LimeChat" ]]); then  
+  brew cask install limechat --force
+fi
 #brew cask install spotify
 #brew cask install u-torrent
 #brew cask install source-tree
@@ -109,27 +173,35 @@ brew cask install limechat --force
 #brew cask install filezilla
 #brew cask install kaleidoscope
 #brew cask install firefox-aurora
-brew cask install google-chrome -force
+if ([[ $choice == *"all"* ]] || [[ $choice == "GoogleChrome" ]]); then  
+  brew cask install google-chrome -force
+fi
 #brew cask install google-chrome-canary
 #brew cask install opera-next
 echo_title "END INSTALLING SOFTWARE"
 ############ SOFTWARE ############
 
 ############ DOCKER ############
-echo_title "BEGIN INSTALLING DOCKER"
-brew install docker
-brew install boot2docker
-boot2docker init
-boot2docker up
-echo_title "END INSTALLING DOCKER"
+if ([[ $choice == *"all"* ]] || [[ $choice == "Docker" ]]); then
+  echo_title "BEGIN INSTALLING DOCKER"
+  brew install docker
+  brew install boot2docker
+  boot2docker init
+  boot2docker up
+  echo_title "END INSTALLING DOCKER"
+fi
 ############ DOCKER ############
 
 ############ MONGO ############
-echo_title "END INSTALLING MONGO"
-brew install mongodb
-mkdir -p /data/db
-chown -R `whoami` /data
-echo_title "END INSTALLING MONGO"
+
+if ([[ $choice == *"all"* ]] || [[ $choice == "Mongo" ]]); then
+  echo_title "END INSTALLING MONGO"
+  brew install mongodb
+  mkdir -p /data/db
+  chown -R `whoami` /data
+  echo_title "END INSTALLING MONGO"
+fi
+
 ############ MONGO ############
 
 ############ NVM ############
@@ -149,21 +221,21 @@ if [ -f "$HOME/.zshrc" ]; then
     nvm install 0.10
     nvm alias default 0.10   
 fi
-
-
 echo_title "END INSTALLING NVM"
 ############ NVM ############
 
 ############ FONTS ############
-echo_title "BEGIN INSTALLING FONTS"
-fonts=(
-  font-m-plus
-  font-clear-sans
-  font-roboto
-)
-brew tap caskroom/fonts 
-brew cask install ${fonts[@]}
-echo_title "END INSTALLING FONTS"
+if ([[ $choice == *"all"* ]] || [[ $choice == "Fonts" ]]); then
+  echo_title "BEGIN INSTALLING FONTS"
+  fonts=(
+    font-m-plus
+    font-clear-sans
+    font-roboto
+  )
+  brew tap caskroom/fonts 
+  brew cask install ${fonts[@]}
+  echo_title "END INSTALLING FONTS"
+fi
 ############ FONTS ############
 
 ############ NPM ############
@@ -173,19 +245,42 @@ npm install -g bower
 npm install -g jshint
 npm install -g eslint
 npm install -g jscs
-npm install -g gulp
+if ([[ $choice == *"all"* ]] || [[ $choice == "Gulp" ]]); then
+  npm install -g gulp
+fi
+if ([[ $choice == *"all"* ]] || [[ $choice == "Grunt" ]]); then
+  npm install -g grunt
+  npm install -g grunt-cli
+fi
+if ([[ $choice == *"all"* ]] || [[ $choice == "BrowserSync" ]]); then
 npm install -g browser-sync
-npm install -g karma
-npm install -g karma-cli
-npm install -g mocha
-npm install -g browserify
-npm install -g watchify
-npm install -g nodemon
-npm install -g node-inspector
-npm install -g npm-check-updates
-npm install -g cordova
-npm install -g phonegap
-npm install -g ionic
+alias browsersync="browser-sync start --server --files \"**/*.html, **/*.js, **/*.css\""
+fi
+if ([[ $choice == *"all"* ]] || [[ $choice == "Karma" ]]); then
+  npm install -g karma
+  npm install -g karma-cli
+fi
+if ([[ $choice == *"all"* ]] || [[ $choice == "Mocha" ]]); then
+  npm install -g mocha
+fi
+if ([[ $choice == *"all"* ]] || [[ $choice == "Browserify" ]]); then
+  npm install -g browserify
+  npm install -g watchify
+fi
+if ([[ $choice == *"all"* ]] || [[ $choice == "Nodemon" ]]); then
+  npm install -g nodemon
+fi
+if ([[ $choice == *"all"* ]] || [[ $choice == "NodeInspector" ]]); then
+  npm install -g node-inspector
+fi
+if ([[ $choice == *"all"* ]] || [[ $choice == "NpmCheckUpdates" ]]); then
+  npm install -g npm-check-updates
+fi
+if ([[ $choice == *"all"* ]] || [[ $choice == "Cordova" ]]); then
+  npm install -g cordova
+  npm install -g phonegap
+  npm install -g ionic
+fi
 echo_title "END INSTALLING NPM GLOBAL PACKAGES"
 ############ NPM ############
 
