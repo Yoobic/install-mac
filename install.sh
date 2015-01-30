@@ -254,6 +254,7 @@ if ([[ $choice == *"all"* ]] || [[ $choice == "Grunt" ]]); then
 fi
 if ([[ $choice == *"all"* ]] || [[ $choice == "BrowserSync" ]]); then
 npm install -g browser-sync
+alias browsersync="browser-sync start --server --files \"**/*.html, **/*.js, **/*.css\""
 fi
 if ([[ $choice == *"all"* ]] || [[ $choice == "Karma" ]]); then
   npm install -g karma
