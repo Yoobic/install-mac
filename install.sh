@@ -77,6 +77,11 @@ inquirer_software() {
            "NodeInspector" "node-inspector" on
            "NpmCheckUpdates" "npm-check-updates" on
            "Cordova" "Cordova" on
+           "Npm" "Npm" on
+           "Bower" "Bower" on
+           "Jslist" "Jslist" on
+           "Eslint" "Eslint" on
+           "Jscs" "Jscs" on
            )
 
     choice=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -126,11 +131,11 @@ echo_title "END INSTALLING BREW CASK"
 ############ DIALOG ############
 brew install dialog
 inquirer_software
-if [[ $choice == "" ]]
-then
-  echo "Your stack is empty, nothing to install, exiting...";
-  exit
-fi 
+# if [[ $choice == "" ]]
+# then
+#   echo "Your stack is empty, nothing to install, exiting...";
+#   exit
+# fi 
 ############ DIALOG ############
 
 
@@ -206,6 +211,11 @@ fi
 
 ############ NVM ############
 echo_title "BEGIN INSTALL NVM"
+curNodeVersion=$(node --version)
+if [[ ! $curNodeVersion =~ ^v[0-9]+.[0-9]+.[0-9]+$ ]]; then
+  curNodeVersion = "0.10"
+fi
+
 curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
 contentNvm="export NVM_DIR=\"/Users/$USER/.nvm\""
 contentNvm=$contentNvm"\n[ -s \"\$NVM_DIR/nvm.sh\" ] && . \"\$NVM_DIR/nvm.sh\"  # This loads nvm"
@@ -218,8 +228,9 @@ if [ -f "$HOME/.zshrc" ]; then
       inject "nvm" "$contentNvm" "$HOME/.zshrc"
     fi
     source $NVM_PROFILE
+    nvm install $curNodeVersion
     nvm install 0.10
-    nvm alias default 0.10   
+    nvm alias default $curNodeVersion
 fi
 echo_title "END INSTALLING NVM"
 ############ NVM ############
@@ -240,11 +251,21 @@ fi
 
 ############ NPM ############
 echo_title "BEGIN INSTALLING NPM GLOBAL PACKAGES"
-npm install -g npm
-npm install -g bower
-npm install -g jshint
-npm install -g eslint
-npm install -g jscs
+if ([[ $choice == *"all"* ]] || [[ $choice == "Npm" ]]); then
+  npm install -g npm
+fi
+if ([[ $choice == *"all"* ]] || [[ $choice == "Bower" ]]); then
+  npm install -g bower
+fi
+if ([[ $choice == *"all"* ]] || [[ $choice == "Jshint" ]]); then
+  npm install -g jshint
+fi
+if ([[ $choice == *"all"* ]] || [[ $choice == "Eslint" ]]); then
+  npm install -g eslint
+fi
+if ([[ $choice == *"all"* ]] || [[ $choice == "Jscs" ]]); then
+  npm install -g jscs
+fi
 if ([[ $choice == *"all"* ]] || [[ $choice == "Gulp" ]]); then
   npm install -g gulp
 fi
@@ -283,6 +304,19 @@ if ([[ $choice == *"all"* ]] || [[ $choice == "Cordova" ]]); then
 fi
 echo_title "END INSTALLING NPM GLOBAL PACKAGES"
 ############ NPM ############
+
+############ SET GIT CREDENTIALS ############
+echo_title "START SET GIT CREDENTIALS"
+if [ "$TRAVIS" != "true" ]; then
+  echo_color "Please enter your user name at Github:"
+  read username
+  echo_color "Please enter your email at Github:"
+  read email
+  git config --global user.name $username
+  git config --global user.email $email
+fi
+echo_title "END SET GIT CREDENTIALS"
+############ SET GIT CREDENTIALS ############
 
 ############ SUBLIME PACKAGE ############
 folder_sublime_packages="~/Library/Application\ Support/Sublime\ Text\ 3"
