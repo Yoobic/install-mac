@@ -67,21 +67,21 @@ inquirer_software() {
            "Slack" "Slack" on
            "SublimeText3" "Sublime Text 3" on
            "VirtualBox" "Virtual Box" on
-           "Gulp" "gulp" on
-           "Grunt" "grunt" on
+           "Bower" "Bower" on
+           "Browserify" "browserify" on
            "BrowserSync" "browser-sync" on
+           "Cordova" "Cordova" on
+           "Eslint" "Eslint" on
+           "Grunt" "grunt" on           
+           "Gulp" "gulp" on
+           "Jscs" "Jscs" on
+           "Jshint" "Jshint" on
            "Karma" "karma" on
            "Mocha" "mocha" on
-           "Browserify" "browserify" on
-           "Nodemon" "nodemon" on
            "NodeInspector" "node-inspector" on
-           "NpmCheckUpdates" "npm-check-updates" on
-           "Cordova" "Cordova" on
+           "Nodemon" "nodemon" on
            "Npm" "Npm" on
-           "Bower" "Bower" on
-           "Jslist" "Jslist" on
-           "Eslint" "Eslint" on
-           "Jscs" "Jscs" on
+           "NpmCheckUpdates" "npm-check-updates" on
            )
 
     choice=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -257,25 +257,34 @@ fi
 if ([[ $choice == *"all"* ]] || [[ $choice == "Bower" ]]); then
   npm install -g bower
 fi
-if ([[ $choice == *"all"* ]] || [[ $choice == "Jshint" ]]); then
-  npm install -g jshint
+if ([[ $choice == *"all"* ]] || [[ $choice == "Browserify" ]]); then
+  npm install -g browserify
+  npm install -g watchify
+fi
+if ([[ $choice == *"all"* ]] || [[ $choice == "BrowserSync" ]]); then
+npm install -g browser-sync
+alias browsersync="browser-sync start --server --files \"**/*.html, **/*.js, **/*.css\""
+fi
+if ([[ $choice == *"all"* ]] || [[ $choice == "Cordova" ]]); then
+  npm install -g cordova
+  npm install -g phonegap
+  npm install -g ionic
 fi
 if ([[ $choice == *"all"* ]] || [[ $choice == "Eslint" ]]); then
   npm install -g eslint
-fi
-if ([[ $choice == *"all"* ]] || [[ $choice == "Jscs" ]]); then
-  npm install -g jscs
-fi
-if ([[ $choice == *"all"* ]] || [[ $choice == "Gulp" ]]); then
-  npm install -g gulp
 fi
 if ([[ $choice == *"all"* ]] || [[ $choice == "Grunt" ]]); then
   npm install -g grunt
   npm install -g grunt-cli
 fi
-if ([[ $choice == *"all"* ]] || [[ $choice == "BrowserSync" ]]); then
-npm install -g browser-sync
-alias browsersync="browser-sync start --server --files \"**/*.html, **/*.js, **/*.css\""
+if ([[ $choice == *"all"* ]] || [[ $choice == "Gulp" ]]); then
+  npm install -g gulp
+fi
+if ([[ $choice == *"all"* ]] || [[ $choice == "Jscs" ]]); then
+  npm install -g jscs
+fi
+if ([[ $choice == *"all"* ]] || [[ $choice == "Jshint" ]]); then
+  npm install -g jshint
 fi
 if ([[ $choice == *"all"* ]] || [[ $choice == "Karma" ]]); then
   npm install -g karma
@@ -284,23 +293,14 @@ fi
 if ([[ $choice == *"all"* ]] || [[ $choice == "Mocha" ]]); then
   npm install -g mocha
 fi
-if ([[ $choice == *"all"* ]] || [[ $choice == "Browserify" ]]); then
-  npm install -g browserify
-  npm install -g watchify
+if ([[ $choice == *"all"* ]] || [[ $choice == "NodeInspector" ]]); then
+  npm install -g node-inspector
 fi
 if ([[ $choice == *"all"* ]] || [[ $choice == "Nodemon" ]]); then
   npm install -g nodemon
 fi
-if ([[ $choice == *"all"* ]] || [[ $choice == "NodeInspector" ]]); then
-  npm install -g node-inspector
-fi
 if ([[ $choice == *"all"* ]] || [[ $choice == "NpmCheckUpdates" ]]); then
   npm install -g npm-check-updates
-fi
-if ([[ $choice == *"all"* ]] || [[ $choice == "Cordova" ]]); then
-  npm install -g cordova
-  npm install -g phonegap
-  npm install -g ionic
 fi
 echo_title "END INSTALLING NPM GLOBAL PACKAGES"
 ############ NPM ############

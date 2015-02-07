@@ -30,36 +30,46 @@ To install the package run the following command:
 curl -L https://raw.githubusercontent.com/Yoobic/install-mac/master/install.sh | sh
 ```
 
-
-It will install the following:
+### Infrastructure Software installed:
 * brew
-* mongo
-* nvm (node)
+* brew-cask (caskroom/cask/brew-cask)
 * git
+* imagemagick
+* nvm (node)
+* ohmyz
+* python
 * tree
 * wget
-* imagemagick
-* iTerm2
+
+### Software installed:
 * Alfred
-* Skype
+* Docker
 * Dropbox
+* Fonts (m-plus, clear-sans, roboto)
+* Google Chrome
+* iTerm2
+* LimeChat
+* Mongodb
+* Skype
+* Slack
 * Sublime Text 3
 * VirtualBox
-* Slack
-* LimeChat
+
+### Npm Packages installed:
+* bower
+* browserify
+* browser-sync
+* cordova
+* eslint
+* grunt
 * gulp
+* jscs
+* jshint
 * karma
 * mocha
-* browser-sync
-* jshint
-* eslint
-* jscs
-* browserify
-* watchify
-* nodemon
 * node-inspector
-* cordova
-* phonegap
-* ionic
+* nodemon
+* npm
+* npm-check-updates
 
 
