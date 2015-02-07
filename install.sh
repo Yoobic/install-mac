@@ -67,16 +67,21 @@ inquirer_software() {
            "Slack" "Slack" on
            "SublimeText3" "Sublime Text 3" on
            "VirtualBox" "Virtual Box" on
-           "Gulp" "gulp" on
-           "Grunt" "grunt" on
+           "Bower" "Bower" on
+           "Browserify" "browserify" on
            "BrowserSync" "browser-sync" on
+           "Cordova" "Cordova" on
+           "Eslint" "Eslint" on
+           "Grunt" "grunt" on           
+           "Gulp" "gulp" on
+           "Jscs" "Jscs" on
+           "Jshint" "Jshint" on
            "Karma" "karma" on
            "Mocha" "mocha" on
-           "Browserify" "browserify" on
-           "Nodemon" "nodemon" on
            "NodeInspector" "node-inspector" on
+           "Nodemon" "nodemon" on
+           "Npm" "Npm" on
            "NpmCheckUpdates" "npm-check-updates" on
-           "Cordova" "Cordova" on
            )
 
     choice=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -126,11 +131,11 @@ echo_title "END INSTALLING BREW CASK"
 ############ DIALOG ############
 brew install dialog
 inquirer_software
-if [[ $choice == "" ]]
-then
-  echo "Your stack is empty, nothing to install, exiting...";
-  exit
-fi 
+# if [[ $choice == "" ]]
+# then
+#   echo "Your stack is empty, nothing to install, exiting...";
+#   exit
+# fi 
 ############ DIALOG ############
 
 
@@ -206,6 +211,11 @@ fi
 
 ############ NVM ############
 echo_title "BEGIN INSTALL NVM"
+curNodeVersion=$(node --version)
+if [[ ! $curNodeVersion =~ ^v[0-9]+.[0-9]+.[0-9]+$ ]]; then
+  curNodeVersion = "0.10"
+fi
+
 curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
 contentNvm="export NVM_DIR=\"/Users/$USER/.nvm\""
 contentNvm=$contentNvm"\n[ -s \"\$NVM_DIR/nvm.sh\" ] && . \"\$NVM_DIR/nvm.sh\"  # This loads nvm"
@@ -218,8 +228,9 @@ if [ -f "$HOME/.zshrc" ]; then
       inject "nvm" "$contentNvm" "$HOME/.zshrc"
     fi
     source $NVM_PROFILE
+    nvm install $curNodeVersion
     nvm install 0.10
-    nvm alias default 0.10   
+    nvm alias default $curNodeVersion
 fi
 echo_title "END INSTALLING NVM"
 ############ NVM ############
@@ -240,21 +251,40 @@ fi
 
 ############ NPM ############
 echo_title "BEGIN INSTALLING NPM GLOBAL PACKAGES"
-npm install -g npm
-npm install -g bower
-npm install -g jshint
-npm install -g eslint
-npm install -g jscs
-if ([[ $choice == *"all"* ]] || [[ $choice == "Gulp" ]]); then
-  npm install -g gulp
+if ([[ $choice == *"all"* ]] || [[ $choice == "Npm" ]]); then
+  npm install -g npm
+fi
+if ([[ $choice == *"all"* ]] || [[ $choice == "Bower" ]]); then
+  npm install -g bower
+fi
+if ([[ $choice == *"all"* ]] || [[ $choice == "Browserify" ]]); then
+  npm install -g browserify
+  npm install -g watchify
+fi
+if ([[ $choice == *"all"* ]] || [[ $choice == "BrowserSync" ]]); then
+npm install -g browser-sync
+alias browsersync="browser-sync start --server --files \"**/*.html, **/*.js, **/*.css\""
+fi
+if ([[ $choice == *"all"* ]] || [[ $choice == "Cordova" ]]); then
+  npm install -g cordova
+  npm install -g phonegap
+  npm install -g ionic
+fi
+if ([[ $choice == *"all"* ]] || [[ $choice == "Eslint" ]]); then
+  npm install -g eslint
 fi
 if ([[ $choice == *"all"* ]] || [[ $choice == "Grunt" ]]); then
   npm install -g grunt
   npm install -g grunt-cli
 fi
-if ([[ $choice == *"all"* ]] || [[ $choice == "BrowserSync" ]]); then
-npm install -g browser-sync
-alias browsersync="browser-sync start --server --files \"**/*.html, **/*.js, **/*.css\""
+if ([[ $choice == *"all"* ]] || [[ $choice == "Gulp" ]]); then
+  npm install -g gulp
+fi
+if ([[ $choice == *"all"* ]] || [[ $choice == "Jscs" ]]); then
+  npm install -g jscs
+fi
+if ([[ $choice == *"all"* ]] || [[ $choice == "Jshint" ]]); then
+  npm install -g jshint
 fi
 if ([[ $choice == *"all"* ]] || [[ $choice == "Karma" ]]); then
   npm install -g karma
@@ -263,26 +293,30 @@ fi
 if ([[ $choice == *"all"* ]] || [[ $choice == "Mocha" ]]); then
   npm install -g mocha
 fi
-if ([[ $choice == *"all"* ]] || [[ $choice == "Browserify" ]]); then
-  npm install -g browserify
-  npm install -g watchify
+if ([[ $choice == *"all"* ]] || [[ $choice == "NodeInspector" ]]); then
+  npm install -g node-inspector
 fi
 if ([[ $choice == *"all"* ]] || [[ $choice == "Nodemon" ]]); then
   npm install -g nodemon
 fi
-if ([[ $choice == *"all"* ]] || [[ $choice == "NodeInspector" ]]); then
-  npm install -g node-inspector
-fi
 if ([[ $choice == *"all"* ]] || [[ $choice == "NpmCheckUpdates" ]]); then
   npm install -g npm-check-updates
 fi
-if ([[ $choice == *"all"* ]] || [[ $choice == "Cordova" ]]); then
-  npm install -g cordova
-  npm install -g phonegap
-  npm install -g ionic
-fi
 echo_title "END INSTALLING NPM GLOBAL PACKAGES"
 ############ NPM ############
+
+############ SET GIT CREDENTIALS ############
+echo_title "START SET GIT CREDENTIALS"
+if [ "$TRAVIS" != "true" ]; then
+  echo_color "Please enter your user name at Github:"
+  read username
+  echo_color "Please enter your email at Github:"
+  read email
+  git config --global user.name $username
+  git config --global user.email $email
+fi
+echo_title "END SET GIT CREDENTIALS"
+############ SET GIT CREDENTIALS ############
 
 ############ SUBLIME PACKAGE ############
 folder_sublime_packages="~/Library/Application\ Support/Sublime\ Text\ 3"
