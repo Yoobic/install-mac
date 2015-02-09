@@ -142,11 +142,21 @@ inquirer_software
 
 ############ SOFTWARE ############
 echo_title "BEGIN INSTALLING SOFTWARE"
-brew install tree
-brew install wget 
-brew install imagemagick
-brew install git
-brew install python
+if ( ! which tree >/dev/null); then
+  brew install tree;
+fi 
+if ( ! which wget >/dev/null); then
+  brew install wget;
+fi 
+if ( ! which imagemagick >/dev/null); then
+  brew install imagemagick;
+fi 
+if ( ! which git >/dev/null); then
+  brew install git;
+fi 
+if ( ! which python >/dev/null); then
+  brew install python;
+fi 
 
 if ([[ $choice == *"all"* ]] || [[ $choice == "Spectacle" ]]); then
   brew cask install spectacle --force
