@@ -52,6 +52,7 @@ curl -L https://raw.githubusercontent.com/Yoobic/install-mac/master/install.sh |
 * Mongodb
 * Skype
 * Slack
+* Spectacle
 * Sublime Text 3
 * VirtualBox
 

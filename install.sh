@@ -65,6 +65,7 @@ inquirer_software() {
            "Mongo" "Mongodb" on
            "Skype" "Skype" on
            "Slack" "Slack" on
+           "Spectacle" "Spectacle" on
            "SublimeText3" "Sublime Text 3" on
            "VirtualBox" "Virtual Box" on
            "Bower" "Bower" on
@@ -147,6 +148,9 @@ brew install imagemagick
 brew install git
 brew install python
 
+if ([[ $choice == *"all"* ]] || [[ $choice == "Spectacle" ]]); then
+  brew cask install spectacle --force
+fi
 if ([[ $choice == *"all"* ]] || [[ $choice == "SublimeText3" ]]); then
   brew cask install sublime-text3 --force
 fi
