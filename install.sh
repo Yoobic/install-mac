@@ -65,6 +65,7 @@ inquirer_software() {
            "Mongo" "Mongodb" on
            "Skype" "Skype" on
            "Slack" "Slack" on
+           "Spectacle" "Spectacle" on
            "SublimeText3" "Sublime Text 3" on
            "VirtualBox" "Virtual Box" on
            "Bower" "Bower" on
@@ -141,12 +142,25 @@ inquirer_software
 
 ############ SOFTWARE ############
 echo_title "BEGIN INSTALLING SOFTWARE"
-brew install tree
-brew install wget 
-brew install imagemagick
-brew install git
-brew install python
+if ( ! which tree >/dev/null); then
+  brew install tree;
+fi 
+if ( ! which wget >/dev/null); then
+  brew install wget;
+fi 
+if ( ! which imagemagick >/dev/null); then
+  brew install imagemagick;
+fi 
+if ( ! which git >/dev/null); then
+  brew install git;
+fi 
+if ( ! which python >/dev/null); then
+  brew install python;
+fi 
 
+if ([[ $choice == *"all"* ]] || [[ $choice == "Spectacle" ]]); then
+  brew cask install spectacle --force
+fi
 if ([[ $choice == *"all"* ]] || [[ $choice == "SublimeText3" ]]); then
   brew cask install sublime-text3 --force
 fi
