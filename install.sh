@@ -67,6 +67,7 @@ inquirer_software() {
            "Slack" "Slack" on
            "Spectacle" "Spectacle" on
            "SublimeText3" "Sublime Text 3" on
+           "TeamViewer" "TeamViewer" on
            "VirtualBox" "Virtual Box" on
            "Bower" "Bower" on
            "Browserify" "browserify" on
@@ -91,6 +92,15 @@ inquirer_software() {
 }
 
 clear
+############ Xcode ############
+if [ "$TRAVIS" != "true" ]; then
+  xcodeVersion=`xcodebuild -version | grep Xcode | cut -d' ' -f2 | cut -d'.' -f1`
+  if [ "$xcodeVersion" -lt "6" ]; then
+    echo_color "Your Xcode version is lower than 6. Please install the latest Xcode version from the App Store." $color_red
+    exit
+  fi
+fi
+############ Xcode ############
 
 ############ ZSH ############
 echo_title "BEGIN INSTALLING ZSH"
@@ -143,21 +153,23 @@ inquirer_software
 ############ SOFTWARE ############
 echo_title "BEGIN INSTALLING SOFTWARE"
 if ( ! which tree >/dev/null); then
-  brew install tree;
+  brew install tree
 fi 
 if ( ! which wget >/dev/null); then
-  brew install wget;
+  brew install wget
 fi 
 if ( ! which imagemagick >/dev/null); then
-  brew install imagemagick;
+  brew install imagemagick
 fi 
 if ( ! which git >/dev/null); then
-  brew install git;
+  brew install git
 fi 
 if ( ! which python >/dev/null); then
-  brew install python;
+  brew install python
 fi 
-
+if ([[ $choice == *"all"* ]] || [[ $choice == "TeamViewer" ]]); then
+brew cask install teamviewer --force
+fi
 if ([[ $choice == *"all"* ]] || [[ $choice == "Spectacle" ]]); then
   brew cask install spectacle --force
 fi
