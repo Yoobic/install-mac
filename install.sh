@@ -10,7 +10,6 @@ color_magenta="\x1B[35m"
 color_cyan="\x1B[36m"
 color_white="\x1B[37m"
 
-
 # Inject content between 2 delimiters
 # usage : inject sectionName newContent fileName
 inject() {
@@ -87,17 +86,66 @@ inquirer_software() {
            )
 
     choice=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
-
   fi
 }
 
+configure_sublime() {
+  
+
+  ln -s "$applicationsPrefix/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin/subl
+  mkdir "$applicationsSupportPrefix/Sublime Text 3"
+  mkdir "$applicationsSupportPrefix/Sublime Text 3/Packages"
+  mkdir "$applicationsSupportPrefix/Sublime Text 3/Packages/User"
+  mkdir "$applicationsSupportPrefix/Sublime Text 3/Installed Packages"
+
+  packagecontrol="$applicationsSupportPrefix/Sublime Text 3/Installed Packages/Package Control.sublime-package"
+  curl -L "https://packagecontrol.io/Package%20Control.sublime-package" > "$packagecontrol"
+  printf "\nDownloaded package control\n"
+
+  packagesettings="$applicationsSupportPrefix/Sublime Text 3/Packages/User/Package Control.sublime-settings"
+  if [[ -f "$packagesettings" ]]; then
+    cp "$packagesettings" "$packagesettings.old"
+    printf "\nBacked up of package settings file in $packagesettings.old\n"
+  fi
+  curl -L "https://raw.githubusercontent.com/Yoobic/dotfiles/master/sublime/Package%20Control.sublime-settings" > "$packagesettings"
+  printf "\nDownloaded package control settings\n"
+
+  preferences="$applicationsSupportPrefix/Sublime Text 3/Packages/User/Preferences.sublime-settings"
+  if [[ -f "$preferences" ]]; then
+    cp "$preferences" "$preferences.old"
+    printf "\nBacked up old preferences file in $preferences.old\n"
+  fi
+  curl -L "https://raw.githubusercontent.com/Yoobic/dotfiles/master/sublime/Preferences.sublime-settings" > "$preferences"
+  printf "\nDownloaded user preferences\n"
+}
+
 clear
+
+# get special folders
+applicationsSupportPrefix="$(osascript \
+  -e 'tell application "System Events"' \
+  -e 'get POSIX path of (path to application support folder from user domain)' \
+  -e 'end tell')"
+applicationsPrefix="$(osascript \
+  -e 'tell application "System Events"' \
+  -e 'get POSIX path of (path to applications folder)' \
+  -e 'end tell')"
+
+echo_color "Application Support: $applicationsSupportPrefix" $color_yellow
+printf "\n"
+echo_color "Applications: $applicationsPrefix" $color_yellow
+printf "\n"
+
 ############ Xcode ############
 if [ "$TRAVIS" != "true" ]; then
+  if ! xcodebuild -version; then
+    echo_color "Please install the latest Xcode version from the App Store." $color_red
+    exit 1
+  fi
   xcodeVersion=`xcodebuild -version | grep Xcode | cut -d' ' -f2 | cut -d'.' -f1`
   if [ "$xcodeVersion" -lt "6" ]; then
     echo_color "Your Xcode version is lower than 6. Please install the latest Xcode version from the App Store." $color_red
-    exit
+    exit 1
   fi
 fi
 ############ Xcode ############
@@ -131,7 +179,8 @@ brew install caskroom/cask/brew-cask
 brew tap caskroom/versions
 # configure cask installation in /Applications
 if [ -f "$HOME/.zshrc" ]; then
-    contentCask="export HOMEBREW_CASK_OPTS=\"--appdir=/Applications\""
+    contentCask="export HOMEBREW_CASK_OPTS=\"--appdir="$applicationsPrefix"\""
+    echo $contentCask
     inject "cask" "$contentCask" "$HOME/.zshrc"
     source "$HOME/.zshrc"
 fi
@@ -167,34 +216,36 @@ fi
 if ( ! which python >/dev/null); then
   brew install python
 fi 
-if ([[ $choice == *"all"* ]] || [[ $choice == "TeamViewer" ]]); then
-brew cask install teamviewer --force
+if ([[ $choice == *"all"* ]] || [[ $choice == *"TeamViewer"* ]]); then
+  brew cask install teamviewer --force
 fi
-if ([[ $choice == *"all"* ]] || [[ $choice == "Spectacle" ]]); then
+if ([[ $choice == *"all"* ]] || [[ $choice == *"Spectacle"* ]]); then
   brew cask install spectacle --force
 fi
-if ([[ $choice == *"all"* ]] || [[ $choice == "SublimeText3" ]]); then
+if ([[ $choice == *"all"* ]] || [[ $choice == *"SublimeText3"* ]]); then
   brew cask install sublime-text3 --force
+  configure_sublime
+  echo_color "When running sublime, it will look broken, ignore it. Press OK on alerts and wait for sublime to install its packages. Press ctrl+\` to see the installation log." $color_yellow
 fi
-if ([[ $choice == *"all"* ]] || [[ $choice == "iTerm2" ]]); then
+if ([[ $choice == *"all"* ]] || [[ $choice == *"iTerm2"* ]]); then
   brew cask install iterm2 --force
 fi
-if ([[ $choice == *"all"* ]] || [[ $choice == "VirtualBox" ]]); then
+if ([[ $choice == *"all"* ]] || [[ $choice == *"VirtualBox"* ]]); then
   brew cask install virtualbox --force
 fi
-if ([[ $choice == *"all"* ]] || [[ $choice == "Alfred" ]]); then
+if ([[ $choice == *"all"* ]] || [[ $choice == *"Alfred"* ]]); then
   brew cask install alfred --force
 fi
-if ([[ $choice == *"all"* ]] || [[ $choice == "Dropbox" ]]); then
+if ([[ $choice == *"all"* ]] || [[ $choice == *"Dropbox"* ]]); then
   brew cask install dropbox --force
 fi
-if ([[ $choice == *"all"* ]] || [[ $choice == "Skype" ]]); then
+if ([[ $choice == *"all"* ]] || [[ $choice == *"Skype"* ]]); then
   brew cask install skype --force
 fi
-if ([[ $choice == *"all"* ]] || [[ $choice == "Slack" ]]); then
+if ([[ $choice == *"all"* ]] || [[ $choice == *"Slack"* ]]); then
   brew cask install slack --force
 fi
-if ([[ $choice == *"all"* ]] || [[ $choice == "LimeChat" ]]); then  
+if ([[ $choice == *"all"* ]] || [[ $choice == *"LimeChat"* ]]); then  
   brew cask install limechat --force
 fi
 #brew cask install spotify
@@ -204,7 +255,7 @@ fi
 #brew cask install filezilla
 #brew cask install kaleidoscope
 #brew cask install firefox-aurora
-if ([[ $choice == *"all"* ]] || [[ $choice == "GoogleChrome" ]]); then  
+if ([[ $choice == *"all"* ]] || [[ $choice == *"GoogleChrome"* ]]); then  
   brew cask install google-chrome -force
 fi
 #brew cask install google-chrome-canary
@@ -213,7 +264,7 @@ echo_title "END INSTALLING SOFTWARE"
 ############ SOFTWARE ############
 
 ############ DOCKER ############
-if ([[ $choice == *"all"* ]] || [[ $choice == "Docker" ]]); then
+if ([[ $choice == *"all"* ]] || [[ $choice == *"Docker"* ]]); then
   echo_title "BEGIN INSTALLING DOCKER"
   brew install docker
   brew install boot2docker
@@ -225,7 +276,7 @@ fi
 
 ############ MONGO ############
 
-if ([[ $choice == *"all"* ]] || [[ $choice == "Mongo" ]]); then
+if ([[ $choice == *"all"* ]] || [[ $choice == *"Mongo"* ]]); then
   echo_title "END INSTALLING MONGO"
   brew install mongodb
   mkdir -p /data/db
@@ -262,7 +313,7 @@ echo_title "END INSTALLING NVM"
 ############ NVM ############
 
 ############ FONTS ############
-if ([[ $choice == *"all"* ]] || [[ $choice == "Fonts" ]]); then
+if ([[ $choice == *"all"* ]] || [[ $choice == *"Fonts"* ]]); then
   echo_title "BEGIN INSTALLING FONTS"
   fonts=(
     font-m-plus
@@ -277,55 +328,55 @@ fi
 
 ############ NPM ############
 echo_title "BEGIN INSTALLING NPM GLOBAL PACKAGES"
-if ([[ $choice == *"all"* ]] || [[ $choice == "Npm" ]]); then
+if ([[ $choice == *"all"* ]] || [[ $choice == *"Npm"* ]]); then
   npm install -g npm
 fi
-if ([[ $choice == *"all"* ]] || [[ $choice == "Bower" ]]); then
+if ([[ $choice == *"all"* ]] || [[ $choice == *"Bower"* ]]); then
   npm install -g bower
 fi
-if ([[ $choice == *"all"* ]] || [[ $choice == "Browserify" ]]); then
+if ([[ $choice == *"all"* ]] || [[ $choice == *"Browserify"* ]]); then
   npm install -g browserify
   npm install -g watchify
 fi
-if ([[ $choice == *"all"* ]] || [[ $choice == "BrowserSync" ]]); then
+if ([[ $choice == *"all"* ]] || [[ $choice == *"BrowserSync"* ]]); then
 npm install -g browser-sync
 alias browsersync="browser-sync start --server --files \"**/*.html, **/*.js, **/*.css\""
 fi
-if ([[ $choice == *"all"* ]] || [[ $choice == "Cordova" ]]); then
+if ([[ $choice == *"all"* ]] || [[ $choice == *"Cordova"* ]]); then
   npm install -g cordova
   npm install -g phonegap
   npm install -g ionic
 fi
-if ([[ $choice == *"all"* ]] || [[ $choice == "Eslint" ]]); then
+if ([[ $choice == *"all"* ]] || [[ $choice == *"Eslint"* ]]); then
   npm install -g eslint
 fi
-if ([[ $choice == *"all"* ]] || [[ $choice == "Grunt" ]]); then
+if ([[ $choice == *"all"* ]] || [[ $choice == *"Grunt"* ]]); then
   npm install -g grunt
   npm install -g grunt-cli
 fi
-if ([[ $choice == *"all"* ]] || [[ $choice == "Gulp" ]]); then
+if ([[ $choice == *"all"* ]] || [[ $choice == *"Gulp"* ]]); then
   npm install -g gulp
 fi
-if ([[ $choice == *"all"* ]] || [[ $choice == "Jscs" ]]); then
+if ([[ $choice == *"all"* ]] || [[ $choice == *"Jscs"* ]]); then
   npm install -g jscs
 fi
-if ([[ $choice == *"all"* ]] || [[ $choice == "Jshint" ]]); then
+if ([[ $choice == *"all"* ]] || [[ $choice == *"Jshint"* ]]); then
   npm install -g jshint
 fi
-if ([[ $choice == *"all"* ]] || [[ $choice == "Karma" ]]); then
+if ([[ $choice == *"all"* ]] || [[ $choice == *"Karma"* ]]); then
   npm install -g karma
   npm install -g karma-cli
 fi
-if ([[ $choice == *"all"* ]] || [[ $choice == "Mocha" ]]); then
+if ([[ $choice == *"all"* ]] || [[ $choice == *"Mocha"* ]]); then
   npm install -g mocha
 fi
-if ([[ $choice == *"all"* ]] || [[ $choice == "NodeInspector" ]]); then
+if ([[ $choice == *"all"* ]] || [[ $choice == *"NodeInspector"* ]]); then
   npm install -g node-inspector
 fi
-if ([[ $choice == *"all"* ]] || [[ $choice == "Nodemon" ]]); then
+if ([[ $choice == *"all"* ]] || [[ $choice == *"Nodemon"* ]]); then
   npm install -g nodemon
 fi
-if ([[ $choice == *"all"* ]] || [[ $choice == "NpmCheckUpdates" ]]); then
+if ([[ $choice == *"all"* ]] || [[ $choice == *"NpmCheckUpdates"* ]]); then
   npm install -g npm-check-updates
 fi
 echo_title "END INSTALLING NPM GLOBAL PACKAGES"
@@ -343,28 +394,6 @@ if [ "$TRAVIS" != "true" ]; then
 fi
 echo_title "END SET GIT CREDENTIALS"
 ############ SET GIT CREDENTIALS ############
-
-############ SUBLIME PACKAGE ############
-folder_sublime_packages="~/Library/Application\ Support/Sublime\ Text\ 3"
-ln -s "/Applications/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin/subl
-echo_color "Install the following package for Sublime Text 3" $color_yellow
-echo_color "* Color Highlighter" $color_cyan
-echo_color "* Emmet" $color_cyan
-echo_color "* HTML-CSS-JS Prettify" $color_cyan
-#git clone https://github.com/victorporof/Sublime-HTMLPrettify.git "$folder_sublime_packages/Packages/HTML-CSS-JS Prettify"
-echo_color "* SCSS" $color_cyan
-echo_color "* SideBarEnhancements" $color_cyan
-echo_color "* SublimeLinter" $color_cyan
-echo_color "* SublimeLinter-annotations" $color_cyan
-echo_color "* SublimeLinter-contrib-eslint" $color_cyan
-echo_color "* SublimeLinter-jshint" $color_cyan
-echo_color "* SublimeLinter-jscs" $color_cyan
-echo_color "* Sublimerge Pro" $color_cyan
-echo_color "* Ternjs" $color_cyan
-echo_color "* Seti_UI" $color_cyan
-echo_color "* Cobalt2" $color_cyan
-
-############ SUBLIME PACKAGE ############
 
 ############ GIT ALIASES ############
 curl -L https://raw.githubusercontent.com/thaiat/generator-sublime/master/templates/app/bin/git-config.sh | sh
