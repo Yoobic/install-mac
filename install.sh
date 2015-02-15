@@ -158,7 +158,7 @@ fi
 if ( ! which wget >/dev/null); then
   brew install wget
 fi 
-if ( ! which imagemagick >/dev/null); then
+if ( ! which convert >/dev/null); then
   brew install imagemagick
 fi 
 if ( ! which git >/dev/null); then
@@ -335,9 +335,9 @@ echo_title "END INSTALLING NPM GLOBAL PACKAGES"
 echo_title "START SET GIT CREDENTIALS"
 if [ "$TRAVIS" != "true" ]; then
   echo_color "Please enter your user name at Github:"
-  read username
+  read username < /dev/tty
   echo_color "Please enter your email at Github:"
-  read email
+  read email < /dev/tty
   git config --global user.name $username
   git config --global user.email $email
 fi
