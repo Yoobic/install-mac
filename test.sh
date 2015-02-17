@@ -58,9 +58,10 @@ check_file "$app_folder/VirtualBox.app" # check VirtualBox software
 check_file "$app_folder/Slack.app" # check Slack software
 check_file "$app_folder/Google Chrome.app" # check Google Chrome software
 check_file "$app_folder/LimeChat.app" # check Lime Chat software
+check_file "$app_folder/TeamViewer.app" # check Team Viewer software
 
 check_file "$(which npm)" "npm"
-check_file "$(which jshint)" "jsint"
+check_file "$(which jshint)" "jshint"
 check_file "$(which eslint)" "eslint"
 check_file "$(which jscs)" "jscs"
 check_file "$(which gulp)" "gulp"
