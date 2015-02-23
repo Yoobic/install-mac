@@ -107,7 +107,7 @@ configure_sublime() {
     cp "$packagesettings" "$packagesettings.old"
     printf "\nBacked up of package settings file in $packagesettings.old\n"
   fi
-  curl -L "https://raw.githubusercontent.com/Yoobic/dotfiles/master/sublime/Package%20Control.sublime-settings" > "$packagesettings"
+  curl -L "https://raw.githubusercontent.com/thaiat/generator-sublime/master/templates/sublime/Package%20Control.sublime-settings" > "$packagesettings"
   printf "\nDownloaded package control settings\n"
 
   preferences="$applicationsSupportPrefix/Sublime Text 3/Packages/User/Preferences.sublime-settings"
@@ -115,7 +115,7 @@ configure_sublime() {
     cp "$preferences" "$preferences.old"
     printf "\nBacked up old preferences file in $preferences.old\n"
   fi
-  curl -L "https://raw.githubusercontent.com/Yoobic/dotfiles/master/sublime/Preferences.sublime-settings" > "$preferences"
+  curl -L "https://raw.githubusercontent.com/thaiat/generator-sublime/master/templates/sublime/Preferences.sublime-settings" > "$preferences"
   printf "\nDownloaded user preferences\n"
 }
 
