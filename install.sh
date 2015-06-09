@@ -62,6 +62,7 @@ inquirer_software() {
            "iTerm2" "iTerm2" on
            "LimeChat" "LimeChat" on
            "Mongo" "Mongodb" on
+           "Rethinkdb" "Rethinkdb" on
            "Skype" "Skype" on
            "Slack" "Slack" on
            "Spectacle" "Spectacle" on
@@ -283,8 +284,16 @@ if ([[ $choice == *"all"* ]] || [[ $choice == *"Mongo"* ]]); then
   chown -R `whoami` /data
   echo_title "END INSTALLING MONGO"
 fi
-
 ############ MONGO ############
+
+############ RETHINKDB ############
+if ([[ $choice == *"all"* ]] || [[ $choice == *"Rethinkdb"* ]]); then
+  echo_title "END INSTALLING RETHINKDB"
+  brew install rethinkdb
+  ln -sfv /usr/local/opt/rethinkdb/*.plist ~/Library/LaunchAgents
+  echo_title "END INSTALLING RETHINKDB"
+fi
+############ RETHINKDB ############
 
 ############ NVM ############
 echo_title "BEGIN INSTALL NVM"
