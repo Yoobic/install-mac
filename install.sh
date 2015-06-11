@@ -84,6 +84,7 @@ inquirer_software() {
            "Nodemon" "nodemon" on
            "Npm" "Npm" on
            "NpmCheckUpdates" "npm-check-updates" on
+           "StrongLoop" "strongloop" on
            )
 
     choice=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
@@ -390,6 +391,9 @@ if ([[ $choice == *"all"* ]] || [[ $choice == *"Nodemon"* ]]); then
 fi
 if ([[ $choice == *"all"* ]] || [[ $choice == *"NpmCheckUpdates"* ]]); then
   npm install -g npm-check-updates
+fi
+if ([[ $choice == *"all"* ]] || [[ $choice == *"StrongLoop"* ]]); then
+  npm install -g strongloop
 fi
 echo_title "END INSTALLING NPM GLOBAL PACKAGES"
 ############ NPM ############

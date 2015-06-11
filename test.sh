@@ -79,5 +79,6 @@ check_file "$(which cordova)" "cordova"
 check_file "$(which phonegap)" "phonegap"
 check_file "$(which ionic)" "ionic"
 check_file "$(which boot2docker)" "boot2docker"
+check_file "$(which slc)" "strongloop"
 
 echo_color "End test" $color_yellow
