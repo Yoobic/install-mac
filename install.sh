@@ -300,7 +300,7 @@ fi
 echo_title "BEGIN INSTALL NVM"
 curNodeVersion=$(node --version)
 if [[ ! $curNodeVersion =~ ^v[0-9]+.[0-9]+.[0-9]+$ ]]; then
-  curNodeVersion = "0.10"
+  curNodeVersion = "0.12"
 fi
 
 curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
@@ -316,7 +316,7 @@ if [ -f "$HOME/.zshrc" ]; then
     fi
     source $NVM_PROFILE
     nvm install $curNodeVersion
-    nvm install 0.10
+    nvm install 0.12
     nvm alias default $curNodeVersion
 fi
 echo_title "END INSTALLING NVM"
