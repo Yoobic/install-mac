@@ -61,7 +61,7 @@ check_file "$app_folder/LimeChat.app" # check Lime Chat software
 check_file "$app_folder/TeamViewer.app" # check Team Viewer software
 
 check_file "$(which npm)" "npm"
-check_file "$(which jshint)" "jshint"
+#check_file "$(which jshint)" "jshint"
 check_file "$(which eslint)" "eslint"
 check_file "$(which jscs)" "jscs"
 check_file "$(which gulp)" "gulp"
