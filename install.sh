@@ -277,12 +277,13 @@ fi
 ############ DOCKER ############
 
 ############ MONGO ############
-
 if ([[ $choice == *"all"* ]] || [[ $choice == *"Mongo"* ]]); then
   echo_title "END INSTALLING MONGO"
   brew install mongodb
+  brew cask install robomongo
   mkdir -p /data/db
   chown -R `whoami` /data
+  ln -sfv /usr/local/opt/mongodb/*.plist ~/Library/LaunchAgents
   echo_title "END INSTALLING MONGO"
 fi
 ############ MONGO ############
@@ -414,5 +415,20 @@ echo_title "END SET GIT CREDENTIALS"
 ############ GIT ALIASES ############
 curl -L https://raw.githubusercontent.com/thaiat/generator-sublime/master/templates/app/bin/git-config.sh | sh
 ############# GIT ALIASES ############
+
+### CONFIGURE ALIASES
+if [ -f "$HOME/.zshrc" ]; then
+    contentAlias="alias rethinkdbstart=\"launchctl load  ~/Library/LaunchAgents/homebrew.mxcl.rethinkdb.plist\""
+    contentAlias=$contentAlias"\n"
+    contentAlias=$contentAlias"alias rethinkdbstop=\"launchctl unload  ~/Library/LaunchAgents/homebrew.mxcl.rethinkdb.plist\""
+    contentAlias=$contentAlias"\n"
+    contentAlias=$contentAlias"alias mongodbstop=\"launchctl unload  ~/Library/LaunchAgents/homebrew.mxcl.mongodb.plist\""
+    contentAlias=$contentAlias"\n"
+    contentAlias=$contentAlias"alias mongodbstop=\"launchctl unload  ~/Library/LaunchAgents/homebrew.mxcl.mongodb.plist\""
+  
+    inject "alias" "$contentAlias" "$HOME/.zshrc"
+    source "$HOME/.zshrc"
+fi
+###
 
 brew cleanup
