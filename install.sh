@@ -62,6 +62,7 @@ inquirer_software() {
            "iTerm2" "iTerm2" on
            "LimeChat" "LimeChat" on
            "Mongo" "Mongodb" on
+           "Robomongo" "Robomongodb" on
            "Rethinkdb" "Rethinkdb" on
            "Skype" "Skype" on
            "Slack" "Slack" on
@@ -285,7 +286,18 @@ if ([[ $choice == *"all"* ]] || [[ $choice == *"Mongo"* ]]); then
   chown -R `whoami` /data
   echo_title "END INSTALLING MONGO"
 fi
-############ MONGO ############
+
+############ ROBOMONGO ############
+
+
+if ([[ $choice == *"all"* ]] || [[ $choice == *"Robomongo"* ]]); then
+  echo_title "END INSTALLING ROBOMONGO"
+  brew install robomongodb
+  mkdir -p /data/db
+  chown -R `whoami` /data
+  echo_title "END INSTALLING ROBOMONGO"
+fi
+############ ROBOMONGO ############
 
 ############ RETHINKDB ############
 if ([[ $choice == *"all"* ]] || [[ $choice == *"Rethinkdb"* ]]); then
