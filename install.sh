@@ -62,7 +62,6 @@ inquirer_software() {
            "iTerm2" "iTerm2" on
            "LimeChat" "LimeChat" on
            "Mongo" "Mongodb" on
-           "Robomongo" "Robomongodb" on
            "Rethinkdb" "Rethinkdb" on
            "Skype" "Skype" on
            "Slack" "Slack" on
@@ -282,22 +281,12 @@ fi
 if ([[ $choice == *"all"* ]] || [[ $choice == *"Mongo"* ]]); then
   echo_title "END INSTALLING MONGO"
   brew install mongodb
+  brew cask install robomongo
   mkdir -p /data/db
   chown -R `whoami` /data
+  ln -sfv /usr/local/opt/mongodb/*.plist ~/Library/LaunchAgents
   echo_title "END INSTALLING MONGO"
 fi
-
-############ ROBOMONGO ############
-
-
-if ([[ $choice == *"all"* ]] || [[ $choice == *"Robomongo"* ]]); then
-  echo_title "END INSTALLING ROBOMONGO"
-  brew install robomongodb
-  mkdir -p /data/db
-  chown -R `whoami` /data
-  echo_title "END INSTALLING ROBOMONGO"
-fi
-############ ROBOMONGO ############
 
 ############ RETHINKDB ############
 if ([[ $choice == *"all"* ]] || [[ $choice == *"Rethinkdb"* ]]); then
@@ -426,5 +415,20 @@ echo_title "END SET GIT CREDENTIALS"
 ############ GIT ALIASES ############
 curl -L https://raw.githubusercontent.com/thaiat/generator-sublime/master/templates/app/bin/git-config.sh | sh
 ############# GIT ALIASES ############
+
+### CONFIGURE ALIASES
+if [ -f "$HOME/.zshrc" ]; then
+    contentAlias="alias rethinkdbstart=\"launchctl load  ~/Library/LaunchAgents/homebrew.mxcl.rethinkdb.plist\""
+    contentAlias=$contentAlias"\n"
+    contentAlias=$contentAlias"alias rethinkdbstop=\"launchctl unload  ~/Library/LaunchAgents/homebrew.mxcl.rethinkdb.plist\""
+    contentAlias=$contentAlias"\n"
+    contentAlias=$contentAlias"alias mongodbstop=\"launchctl unload  ~/Library/LaunchAgents/homebrew.mxcl.mongodb.plist\""
+    contentAlias=$contentAlias"\n"
+    contentAlias=$contentAlias"alias mongodbstop=\"launchctl unload  ~/Library/LaunchAgents/homebrew.mxcl.mongodb.plist\""
+  
+    inject "alias" "$contentAlias" "$HOME/.zshrc"
+    source "$HOME/.zshrc"
+fi
+###
 
 brew cleanup
