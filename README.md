@@ -50,6 +50,7 @@ curl -L https://raw.githubusercontent.com/Yoobic/install-mac/master/install.sh |
 * iTerm2
 * LimeChat
 * Mongodb
+* Robomongo
 * Skype
 * Slack
 * Spectacle
