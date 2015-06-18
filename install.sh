@@ -277,7 +277,6 @@ fi
 ############ DOCKER ############
 
 ############ MONGO ############
-
 if ([[ $choice == *"all"* ]] || [[ $choice == *"Mongo"* ]]); then
   echo_title "END INSTALLING MONGO"
   brew install mongodb
@@ -287,6 +286,7 @@ if ([[ $choice == *"all"* ]] || [[ $choice == *"Mongo"* ]]); then
   ln -sfv /usr/local/opt/mongodb/*.plist ~/Library/LaunchAgents
   echo_title "END INSTALLING MONGO"
 fi
+############ MONGO ############
 
 ############ RETHINKDB ############
 if ([[ $choice == *"all"* ]] || [[ $choice == *"Rethinkdb"* ]]); then
