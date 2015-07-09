@@ -363,6 +363,7 @@ if ([[ $choice == *"all"* ]] || [[ $choice == *"Cordova"* ]]); then
 fi
 if ([[ $choice == *"all"* ]] || [[ $choice == *"Eslint"* ]]); then
   npm install -g eslint
+  npm install -g eslint-plugin-nodeca
 fi
 if ([[ $choice == *"all"* ]] || [[ $choice == *"Grunt"* ]]); then
   npm install -g grunt
