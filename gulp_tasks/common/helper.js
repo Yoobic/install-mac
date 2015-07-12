@@ -1,10 +1,12 @@
 'use strict';
 
+var gulp = require('gulp');
 var fs = require('fs');
 var gutil = require('gulp-util');
 var chalk = require('chalk');
 var stripJsonComments = require('strip-json-comments');
 var _ = require('lodash');
+var es = require('event-stream');
 var path = require('path');
 
 /**
@@ -23,30 +25,52 @@ var isMobile = exports.isMobile = function(constants) {
  * @param  {String} stdout - The stdout string
  * @param  {String} stderr - The stderr string
  */
-var execHandler = exports.execHandler = function(err, stdout, stderr) {
-    if(err) {
+var execHandler = function(err, stdout, stderr) {
+    if (err) {
         gutil.log(chalk.red('An error occured executing a command line action'));
     }
-    if(stdout) {
+    if (stdout) {
         gutil.log(stdout);
     }
-    if(stderr) {
+    if (stderr) {
         gutil.log(chalk.red('Error: ') + stderr);
     }
 };
 
-var readTextFile = exports.readTextFile = function(filename) {
+var readTextFile = function(filename) {
     var body = fs.readFileSync(filename, 'utf8');
     return body;
 };
 
-var readJsonFile = exports.readJsonFile = function(filename) {
+var readJsonFile = function(filename) {
     var body = readTextFile(filename);
     return JSON.parse(stripJsonComments(body));
 };
 
-var filterFiles = exports.filterFiles = function(files, extension) {
+var filterFiles = function(files, extension) {
     return _.filter(files, function(file) {
         return path.extname(file) === extension;
     });
+};
+
+/**
+ * Add new sources in a gulp pipeline
+ * @returns {Stream} A gulp stream
+ * @example
+ * gulp.src('')
+ * .pipe(addSrc('CHANGELOG.md'))
+ * .gulp.dest();
+ */
+var addSrc = function() {
+    var pass = es.through();
+    return es.duplex(pass, es.merge(gulp.src.apply(gulp.src, arguments), pass));
+};
+
+module.exports = {
+    isMobile: isMobile,
+    execHandler: execHandler,
+    readTextFile: readTextFile,
+    readJsonFile: readJsonFile,
+    filterFiles: filterFiles,
+    addSrc: addSrc
 };
