@@ -364,6 +364,7 @@ fi
 if ([[ $choice == *"all"* ]] || [[ $choice == *"Eslint"* ]]); then
   npm install -g eslint
   npm install -g eslint-plugin-nodeca
+  npm install -g babel-eslint
 fi
 if ([[ $choice == *"all"* ]] || [[ $choice == *"Grunt"* ]]); then
   npm install -g grunt
