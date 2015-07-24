@@ -60,7 +60,7 @@ inquirer_software() {
            "Fonts" "Fonts (m-plus, clear-sans, roboto)" on
            "GoogleChrome" "Google Chrome" on
            "iTerm2" "iTerm2" on
-           "LimeChat" "LimeChat" on
+           #"LimeChat" "LimeChat" on
            "Mongo" "Mongodb" on
            "Rethinkdb" "Rethinkdb" on
            "Skype" "Skype" on
@@ -247,9 +247,9 @@ fi
 if ([[ $choice == *"all"* ]] || [[ $choice == *"Slack"* ]]); then
   brew cask install slack --force
 fi
-if ([[ $choice == *"all"* ]] || [[ $choice == *"LimeChat"* ]]); then  
-  brew cask install limechat --force
-fi
+#if ([[ $choice == *"all"* ]] || [[ $choice == *"LimeChat"* ]]); then  
+#  brew cask install limechat --force
+#fi
 #brew cask install spotify
 #brew cask install u-torrent
 #brew cask install source-tree
