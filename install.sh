@@ -57,6 +57,7 @@ inquirer_software() {
     options=("Alfred" "Alfred" on
            "Docker" "Docker" on
            "Dropbox" "Dropbox" on
+           "Flycut" "Flycut" on
            "Fonts" "Fonts (m-plus, clear-sans, roboto)" on
            "GoogleChrome" "Google Chrome" on
            "iTerm2" "iTerm2" on
@@ -223,6 +224,9 @@ if ([[ $choice == *"all"* ]] || [[ $choice == *"TeamViewer"* ]]); then
 fi
 if ([[ $choice == *"all"* ]] || [[ $choice == *"Spectacle"* ]]); then
   brew cask install spectacle --force
+fi
+if ([[ $choice == *"all"* ]] || [[ $choice == *"flycut"* ]]); then
+  brew cask install flycut --force
 fi
 if ([[ $choice == *"all"* ]] || [[ $choice == *"SublimeText3"* ]]); then
   brew cask install sublime-text3 --force

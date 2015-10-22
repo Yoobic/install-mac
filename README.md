@@ -45,6 +45,7 @@ curl -L https://raw.githubusercontent.com/Yoobic/install-mac/master/install.sh |
 * Alfred
 * Docker
 * Dropbox
+* Flycut
 * Fonts (m-plus, clear-sans, roboto)
 * Google Chrome
 * iTerm2
