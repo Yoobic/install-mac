@@ -63,9 +63,7 @@ check_file "$app_folder/TeamViewer.app" # check Team Viewer software
 check_file "$app_folder/Robomongo.app" # check Robomongo software
 
 check_file "$(which npm)" "npm"
-check_file "$(which jshint)" "jshint"
 check_file "$(which eslint)" "eslint"
-check_file "$(which jscs)" "jscs"
 check_file "$(which gulp)" "gulp"
 check_file "$(which grunt)" "grunt"
 check_file "$(which browser-sync)" "browser-sync"
@@ -79,7 +77,6 @@ check_file "$(which node-inspector)" "node-inspector"
 check_file "$(which npm-check-updates)" "npm-check-updates"
 check_file "$(which cordova)" "cordova"
 check_file "$(which phonegap)" "phonegap"
-check_file "$(which ionic)" "ionic"
 check_file "$(which boot2docker)" "boot2docker"
 check_file "$(which slc)" "strongloop"
 

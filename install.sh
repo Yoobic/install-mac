@@ -363,7 +363,6 @@ if ([[ $choice == *"all"* ]] || [[ $choice == *"Cordova"* ]]); then
   npm install -g cordova
   npm install -g cordova-ios
   npm install -g phonegap
-  npm install -g ionic
   npm install -g ios-sim
   npm install -g ios-deploy
 fi
