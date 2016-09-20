@@ -1,33 +1,33 @@
 {
-  "name": "install-mac",
-  "version": "1.1.11",
-  "description": "Simple bash script for installating dev tools on mac os",
-  "bin": "./install.sh",
-  "scripts": {
-    "release": "mcfly-semantic-release",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Yoobic/install-mac.git"
-  },
-  "author": {
-    "name": "Avi Haiat",
-    "email": "thaiat@ipelia.com",
-    "url": "https://github.com/thaiat"
-  },
-  "keywords": [
-    "mac",
-    "os",
-    "install",
-    "tools"
-  ],
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Yoobic/install-mac/issues"
-  },
-  "homepage": "https://github.com/Yoobic/install-mac",
-  "devDependencies": {
-    "mcfly-semantic-release": "^1.0.16"
-  }
+    "name": "install-mac",
+    "version": "1.1.12",
+    "description": "Simple bash script for installating dev tools on mac os",
+    "bin": "./install.sh",
+    "scripts": {
+        "release": "mcfly-semantic-release",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Yoobic/install-mac.git"
+    },
+    "author": {
+        "name": "Avi Haiat",
+        "email": "thaiat@ipelia.com",
+        "url": "https://github.com/thaiat"
+    },
+    "keywords": [
+        "mac",
+        "os",
+        "install",
+        "tools"
+    ],
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/Yoobic/install-mac/issues"
+    },
+    "homepage": "https://github.com/Yoobic/install-mac",
+    "devDependencies": {
+        "mcfly-semantic-release": "^1.0.16"
+    }
 }
