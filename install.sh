@@ -229,7 +229,7 @@ if ([[ $choice == *"all"* ]] || [[ $choice == *"flycut"* ]]); then
   brew cask install flycut --force
 fi
 if ([[ $choice == *"all"* ]] || [[ $choice == *"SublimeText3"* ]]); then
-  brew cask install sublime-text3 --force
+  brew cask install sublime-text --force
   configure_sublime
   echo_color "When running sublime, it will look broken, ignore it. Press OK on alerts and wait for sublime to install its packages. Press ctrl+\` to see the installation log." $color_yellow
 fi
@@ -282,21 +282,23 @@ fi
 
 ############ MONGO ############
 if ([[ $choice == *"all"* ]] || [[ $choice == *"Mongo"* ]]); then
-  echo_title "END INSTALLING MONGO"
+  echo_title "BEGIN INSTALLING MONGO"
   brew install mongodb
   brew cask install robomongo
   mkdir -p /data/db
   chown -R `whoami` /data
-  ln -sfv /usr/local/opt/mongodb/*.plist ~/Library/LaunchAgents
+  #ln -sfv /usr/local/opt/mongodb/*.plist ~/Library/LaunchAgents
+  brew services start mongodb
   echo_title "END INSTALLING MONGO"
 fi
 ############ MONGO ############
 
 ############ RETHINKDB ############
 if ([[ $choice == *"all"* ]] || [[ $choice == *"Rethinkdb"* ]]); then
-  echo_title "END INSTALLING RETHINKDB"
+  echo_title "BEGIN INSTALLING RETHINKDB"
   brew install rethinkdb
-  ln -sfv /usr/local/opt/rethinkdb/*.plist ~/Library/LaunchAgents
+  #ln -sfv /usr/local/opt/rethinkdb/*.plist ~/Library/LaunchAgents
+  brew services start rethinkdb
   echo_title "END INSTALLING RETHINKDB"
 fi
 ############ RETHINKDB ############
@@ -304,9 +306,9 @@ fi
 ############ NVM ############
 echo_title "BEGIN INSTALL NVM"
 curNodeVersion=$(node --version)
-if [[ ! $curNodeVersion =~ ^v[0-9]+.[0-9]+.[0-9]+$ ]]; then
-  curNodeVersion = "4.5.0"
-fi
+#if [[ ! $curNodeVersion =~ ^v[0-9]+.[0-9]+.[0-9]+$ ]]; then
+curNodeVersion = "4.5.0"
+#fi
 
 curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
 contentNvm="export NVM_DIR=\"/Users/$USER/.nvm\""
@@ -321,6 +323,7 @@ if [ -f "$HOME/.zshrc" ]; then
     fi
     source $NVM_PROFILE
     nvm install $curNodeVersion
+    nvm use $curNodeVersion
     nvm alias default $curNodeVersion
 fi
 echo_title "END INSTALLING NVM"
@@ -421,7 +424,7 @@ if [ -f "$HOME/.zshrc" ]; then
     contentAlias=$contentAlias"\n"
     contentAlias=$contentAlias"alias rethinkdbstop=\"launchctl unload  ~/Library/LaunchAgents/homebrew.mxcl.rethinkdb.plist\""
     contentAlias=$contentAlias"\n"
-    contentAlias=$contentAlias"alias mongodbstop=\"launchctl unload  ~/Library/LaunchAgents/homebrew.mxcl.mongodb.plist\""
+    contentAlias=$contentAlias"alias mongodbstart=\"launchctl load  ~/Library/LaunchAgents/homebrew.mxcl.mongodb.plist\""
     contentAlias=$contentAlias"\n"
     contentAlias=$contentAlias"alias mongodbstop=\"launchctl unload  ~/Library/LaunchAgents/homebrew.mxcl.mongodb.plist\""
   
