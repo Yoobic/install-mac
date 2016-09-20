@@ -9,5 +9,5 @@ install:
 
 script:
   - source ~/.zshrc
-  - nvm use 0.12
+  - nvm use 4.5.0
   - bash test.sh
