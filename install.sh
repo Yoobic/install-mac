@@ -305,9 +305,9 @@ fi
 
 ############ NVM ############
 echo_title "BEGIN INSTALL NVM"
-curNodeVersion=$(node --version)
+#curNodeVersion=$(node --version)
 #if [[ ! $curNodeVersion =~ ^v[0-9]+.[0-9]+.[0-9]+$ ]]; then
-curNodeVersion = "4.5.0"
+curNodeVersion="4.5.0"
 #fi
 
 curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
