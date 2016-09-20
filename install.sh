@@ -305,7 +305,7 @@ fi
 echo_title "BEGIN INSTALL NVM"
 curNodeVersion=$(node --version)
 if [[ ! $curNodeVersion =~ ^v[0-9]+.[0-9]+.[0-9]+$ ]]; then
-  curNodeVersion = "0.12"
+  curNodeVersion = "4.5.0"
 fi
 
 curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
@@ -321,7 +321,6 @@ if [ -f "$HOME/.zshrc" ]; then
     fi
     source $NVM_PROFILE
     nvm install $curNodeVersion
-    nvm install 0.12
     nvm alias default $curNodeVersion
 fi
 echo_title "END INSTALLING NVM"
@@ -376,12 +375,6 @@ if ([[ $choice == *"all"* ]] || [[ $choice == *"Grunt"* ]]); then
 fi
 if ([[ $choice == *"all"* ]] || [[ $choice == *"Gulp"* ]]); then
   npm install -g gulp
-fi
-if ([[ $choice == *"all"* ]] || [[ $choice == *"Jscs"* ]]); then
-  npm install -g jscs
-fi
-if ([[ $choice == *"all"* ]] || [[ $choice == *"Jshint"* ]]); then
-  npm install -g jshint
 fi
 if ([[ $choice == *"all"* ]] || [[ $choice == *"Karma"* ]]); then
   npm install -g karma
