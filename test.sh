@@ -51,6 +51,7 @@ check_file $HOME/.zshrc
 check_file "$app_folder/Sublime Text.app" # check Sublime Text software
 check_file "$app_folder/iTerm.app" # check iTerm2 software
 check_file "$app_folder/Spectacle.app" # check iTerm2 software
+check_file "$app_folder/Flycut.app" # check iTerm2 software
 #check_file "$app_folder/alfred.app" # check iTerm2 software
 check_file "$app_folder/Dropbox.app" # check Dropbox software
 check_file "$app_folder/Skype.app" # check Skype software
