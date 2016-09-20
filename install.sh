@@ -230,7 +230,7 @@ if ([[ $choice == *"all"* ]] || [[ $choice == *"flycut"* ]]); then
 fi
 if ([[ $choice == *"all"* ]] || [[ $choice == *"SublimeText3"* ]]); then
   brew cask install sublime-text --force
-  configure_sublime
+  #configure_sublime
   echo_color "When running sublime, it will look broken, ignore it. Press OK on alerts and wait for sublime to install its packages. Press ctrl+\` to see the installation log." $color_yellow
 fi
 if ([[ $choice == *"all"* ]] || [[ $choice == *"iTerm2"* ]]); then
