@@ -4,6 +4,7 @@
   "description": "Simple bash script for installating dev tools on mac os",
   "bin": "./install.sh",
   "scripts": {
+    "release": "mcfly-semantic-release",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
