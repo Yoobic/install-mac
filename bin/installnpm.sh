@@ -7,8 +7,8 @@ inquirer_packages() {
     choice="browserify watchify browser-sync cordova cordova-ios cordova-android ionic eslint eslint-plugin-nodeca babel-eslint grunt grunt-cli gulp ios-sim ios-deploy mocha phonegap node-inspector nodemon npm-check-updates loopback-cli"
   else
     local cmd=(dialog --backtitle "Select your stack" \
-              --title "Your stack" --clear--no-tags \
-              --separate-output --output-separator " " \
+              --title "Your stack" --clear --no-tags \
+              --separate-output --output-separator " " \ # this will separate all outputs with spaces and no quotes to satisfy npm
               --checklist "Select your favorite softwares  " 20 61 15)
 
     local options=(
@@ -40,8 +40,7 @@ inquirer_packages
 
 ############ NPM ############
 echo_title "BEGIN INSTALLING NPM GLOBAL PACKAGES"
-npm install -g ${choice[@]}
-
+echo $choice | xargs npm install -g
 
 if [ -f "$HOME/.zshrc" ]; then
   local -A ALIAS_LIST=(
