@@ -1,17 +1,16 @@
 #!/bin/zsh
 source ./echo_utils.sh
 clear
-declare choice
+local choice
 inquirer_software() {
   if [ "$TRAVIS" = "true" ]; then
     choice="all"
   else
-   cmd=(dialog --backtitle "Select your stack" \
+    local cmd=(dialog --backtitle "Select your stack" \
               --title "Your stack" --clear \
               --checklist "Select your favorite softwares  " 20 61 15)
 
-    options=(
-        "Dropbox" "Dropbox" on
+    local options=("Dropbox" "Dropbox" on
         "Flycut" "Flycut" on
         "Fonts" "Fonts (m-plus, clear-sans, roboto)" on
         "GoogleChrome" "Google Chrome" on
@@ -19,65 +18,44 @@ inquirer_software() {
         "iTerm2" "iTerm2" on
         "Mongo" "Mongodb" on
         "Robo3T" "Robo 3T" on
-        "Spectacle" "Spectacle" on
+        "Spectacle1" "Spectacle" on
         "SublimeText3" "Sublime Text 3" on
         "VSCode" "VS Code" on
         "TeamViewer" "TeamViewer" on
-      # "Alfred" "Alfred" on
-      # "Docker" "Docker" on
-      # "Skype" "Skype" on
-      # "Slack" "Slack" on
-      # "VirtualBox" "Virtual Box" on
-      # "Bower" "Bower" on
-      # "Browserify" "browserify" on
-      # "BrowserSync" "browser-sync" on
-      # "Cordova" "Cordova" on
-      # "Eslint" "Eslint" on
-      # "Grunt" "grunt" on           
-      # "Gulp" "gulp" on
-      # "Jscs" "Jscs" on
-      # "Jshint" "Jshint" on
-      # "Karma" "karma" on
-      # "Mocha" "mocha" on
-      # "NodeInspector" "node-inspector" on
-      # "Nodemon" "nodemon" on
-      # "Npm" "Npm" on
-      # "NpmCheckUpdates" "npm-check-updates" on
-      # "StrongLoop" "strongloop" on
     )
 
-    choice=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+    choice="$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)"
   fi
 }
 
 
-# configure_sublime() {
-#   ln -s "$applicationsPrefix/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin/subl
-#   mkdir "$applicationsSupportPrefix/Sublime Text 3"
-#   mkdir "$applicationsSupportPrefix/Sublime Text 3/Packages"
-#   mkdir "$applicationsSupportPrefix/Sublime Text 3/Packages/User"
-#   mkdir "$applicationsSupportPrefix/Sublime Text 3/Installed Packages"
+# # configure_sublime() {
+# #   ln -s "$applicationsPrefix/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin/subl
+# #   mkdir "$applicationsSupportPrefix/Sublime Text 3"
+# #   mkdir "$applicationsSupportPrefix/Sublime Text 3/Packages"
+# #   mkdir "$applicationsSupportPrefix/Sublime Text 3/Packages/User"
+# #   mkdir "$applicationsSupportPrefix/Sublime Text 3/Installed Packages"
 
-#   packagecontrol="$applicationsSupportPrefix/Sublime Text 3/Installed Packages/Package Control.sublime-package"
-#   curl -L "https://packagecontrol.io/Package%20Control.sublime-package" > "$packagecontrol"
-#   printf "\nDownloaded package control\n"
+# #   packagecontrol="$applicationsSupportPrefix/Sublime Text 3/Installed Packages/Package Control.sublime-package"
+# #   curl -L "https://packagecontrol.io/Package%20Control.sublime-package" > "$packagecontrol"
+# #   printf "\nDownloaded package control\n"
 
-#   packagesettings="$applicationsSupportPrefix/Sublime Text 3/Packages/User/Package Control.sublime-settings"
-#   if [[ -f "$packagesettings" ]]; then
-#     cp "$packagesettings" "$packagesettings.old"
-#     printf "\nBacked up of package settings file in $packagesettings.old\n"
-#   fi
-#   curl -L "https://raw.githubusercontent.com/thaiat/generator-sublime/master/templates/sublime/Package%20Control.sublime-settings" > "$packagesettings"
-#   printf "\nDownloaded package control settings\n"
+# #   packagesettings="$applicationsSupportPrefix/Sublime Text 3/Packages/User/Package Control.sublime-settings"
+# #   if [[ -f "$packagesettings" ]]; then
+# #     cp "$packagesettings" "$packagesettings.old"
+# #     printf "\nBacked up of package settings file in $packagesettings.old\n"
+# #   fi
+# #   curl -L "https://raw.githubusercontent.com/thaiat/generator-sublime/master/templates/sublime/Package%20Control.sublime-settings" > "$packagesettings"
+# #   printf "\nDownloaded package control settings\n"
 
-#   preferences="$applicationsSupportPrefix/Sublime Text 3/Packages/User/Preferences.sublime-settings"
-#   if [[ -f "$preferences" ]]; then
-#     cp "$preferences" "$preferences.old"
-#     printf "\nBacked up old preferences file in $preferences.old\n"
-#   fi
-#   curl -L "https://raw.githubusercontent.com/thaiat/generator-sublime/master/templates/sublime/Preferences.sublime-settings" > "$preferences"
-#   printf "\nDownloaded user preferences\n"
-# }
+# #   preferences="$applicationsSupportPrefix/Sublime Text 3/Packages/User/Preferences.sublime-settings"
+# #   if [[ -f "$preferences" ]]; then
+# #     cp "$preferences" "$preferences.old"
+# #     printf "\nBacked up old preferences file in $preferences.old\n"
+# #   fi
+# #   curl -L "https://raw.githubusercontent.com/thaiat/generator-sublime/master/templates/sublime/Preferences.sublime-settings" > "$preferences"
+# #   printf "\nDownloaded user preferences\n"
+# # }
 
 inquirer_software
 

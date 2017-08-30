@@ -1,16 +1,16 @@
 #!/bin/zsh
 source ./echo_utils.sh
 clear
-declare choice
+local choice
 inquirer_packages() {
   if [ "$TRAVIS" = "true" ]; then
     choice="browserify watchify browser-sync cordova cordova-ios cordova-android ionic eslint eslint-plugin-nodeca babel-eslint grunt grunt-cli gulp ios-sim ios-deploy mocha phonegap node-inspector nodemon npm-check-updates loopback-cli"
   else
-   cmd=(dialog --backtitle "Select your stack" \
+    local cmd=(dialog --backtitle "Select your stack" \
               --title "Your stack" --clear \
               --checklist "Select your favorite softwares  " 20 61 15)
 
-    options=(
+    local options=(
       "browserify watchify" "Browserify" on
       "browser-sync" "BrowserSync" on
       "cordova cordova-ios cordova-android" "Cordova" on

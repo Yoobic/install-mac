@@ -90,7 +90,7 @@ fi
 ############ DIALOG ############
 cd bin
 ############ SOFTWARE ############
-./installssoftware.sh
+./installsoftware.sh
 ############ SOFTWARE ############
 
 ############ NODE ############
@@ -99,7 +99,8 @@ cd bin
 
 ############ GIT ALIASES ############
 ./git-config.sh
-############# GIT ALIASES ############
+############ GIT ALIASES ############
+cd ..
 
 ### CONFIGURE ALIASES
 if [ -f "$HOME/.zshrc" ]; then
