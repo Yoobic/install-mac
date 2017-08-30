@@ -1,4 +1,5 @@
 #!/bin/zsh
+source ~/.zshrc
 source ./echo_utils.sh
 clear
 ############ SET GIT CREDENTIALS ############

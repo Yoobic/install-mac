@@ -1,4 +1,5 @@
 #!/bin/zsh
+source ~/.zshrc
 source ./echo_utils.sh
 clear
 
@@ -11,7 +12,8 @@ echo_title "BEGIN INSTALL NVM NODE"
 
 curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | NODE_VERSION="lts/*" zsh
 
-[[ -f "$HOME/.zshrc" ]] && source "$HOME/.zshrc"
+source ~/.zshrc
+[ -s "$HOME/.nvm/nvm.sh" ] && . "$HOME/.nvm/nvm.sh"  # This loads nvm
 
 NVM_LTS_VERISON="$(nvm version-remote --lts)"
 nvm install $NVM_LTS_VERISON
