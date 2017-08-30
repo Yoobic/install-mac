@@ -79,6 +79,7 @@ echo_title "END INSTALLING BREW CASK"
 
 ############ DIALOG ############
 which -s dialog || brew install dialog
+which -s hub || brew install hub
 # if [[ $choice == "" ]]
 # then
 #   echo "Your stack is empty, nothing to install, exiting...";

@@ -14,65 +14,50 @@ This repo contains a simple bash script that installs the dev tools for a mac.
     sudo dscl localonly -changei /Local/Default/Users/root UserShell 1 $(which zsh)
     ```
 * Restart the computer
-* Install oh-my-zsh
-
-    ```bash
-    curl -L http://install.ohmyz.sh | sh
-    ```
-
-    The installation will launch the installation of `XCode tools` if it is not installed. On the popup window press `Install` 
-
-    Once `XCode tools` installation has completed, re-run the command for installing `oh-my-zsh`
 
 ## Installation
-To install the package run the following command:
+To install the package run the following commands:
 ```bash
-curl -L https://raw.githubusercontent.com/Yoobic/install-mac/master/install.sh | sh
+# This assumes your development directory is `~/Documents/yoobic/`. If it is not, then substitute as appropriate
+cd ~/Documents/yoobic/
+git clone https://github.com/Yoobic/install-mac.git
+cd install-mac
+./install.sh
 ```
+
+The script will then start downloading & installing the software. When prompted, use the keyboard to select which applications and global npm packages you want to install, or just hit **[Enter]** with `<Ok>` selected to take the defaults.
+
+Finally, when prompted you should input your github credentials to ensure that you will be able to use git with our private repos correctly.
 
 ### Infrastructure Software installed:
 * brew
-* brew-cask (caskroom/cask/brew-cask)
 * git
 * imagemagick
 * nvm (node)
-* ohmyz
+* ohmyzsh
 * python
 * tree
 * wget
 
 ### Software installed:
-* Alfred
-* Docker
 * Dropbox
 * Flycut
 * Fonts (m-plus, clear-sans, roboto)
 * Google Chrome
 * iTerm2
-* LimeChat
 * Mongodb
-* Robomongo
+* Robo 3T
 * Skype
-* Slack
 * Spectacle
 * Sublime Text 3
 * VirtualBox
 
 ### Npm Packages installed:
-* bower
 * browserify
 * browser-sync
 * cordova
 * eslint
-* grunt
-* gulp
-* jscs
-* jshint
-* karma
 * mocha
 * node-inspector
 * nodemon
-* npm
 * npm-check-updates
-
-
