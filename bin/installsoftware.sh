@@ -149,7 +149,6 @@ echo_title "END INSTALLING SOFTWARE"
 if ([[ $choice == *"all"* ]] || [[ $choice == *"Mongo"* ]]); then
   echo_title "BEGIN INSTALLING MONGO"
   brew install mongodb
-  brew cask install robomongo
   mkdir -p /data/db
   chown -R `whoami` /data
   #ln -sfv /usr/local/opt/mongodb/*.plist ~/Library/LaunchAgents
