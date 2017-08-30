@@ -1,5 +1,5 @@
 #!/bin/zsh
-source echo_utils.sh
+source ./echo_utils.sh
 clear
 declare choice
 inquirer_software() {

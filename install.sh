@@ -88,17 +88,17 @@ fi
 #   exit
 # fi 
 ############ DIALOG ############
-
+cd bin
 ############ SOFTWARE ############
-./bin/installssoftware.sh
+./installssoftware.sh
 ############ SOFTWARE ############
 
 ############ NODE ############
-./bin/installnode.sh
+./installnode.sh
 ############ NODE ############
 
 ############ GIT ALIASES ############
-./bin/git-config.sh
+./git-config.sh
 ############# GIT ALIASES ############
 
 ### CONFIGURE ALIASES
