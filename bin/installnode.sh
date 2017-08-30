@@ -10,12 +10,12 @@ echo_title "BEGIN INSTALL NVM NODE"
 #fi
 
 if [[ -f "$HOME/.zshrc" ]]; then
-  PROFILE="$HOME/.zshrc"
+  export PROFILE="$HOME/.zshrc"
 fi
 
-NODE_VERSION="lts/*"
+export NODE_VERSION="lts/*"
 
-curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | sh
+curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | zsh
 
 if [ -f "$HOME/.zshrc" ]; then
     source  "$HOME/.zshrc"
