@@ -1,6 +1,17 @@
-#!/bin/sh
+#!/bin/zsh
 
 source ./bin/echo_utils.sh
+export -f echo_color
+export -f echo_title
+export -f inject
+export color_normal
+export color_red
+export color_green
+export color_yellow
+export color_blue
+export color_magenta
+export color_cyan
+export color_white
 clear
 
 # get special folders
@@ -34,11 +45,20 @@ fi
 
 ############ ZSH ############
 echo_title "BEGIN INSTALLING ZSH"
-if [ !"$TRAVIS" == "true" ]; then
-  curl -L http://install.ohmyz.sh | sh
+if [ "$TRAVIS" != "true" ]; then
+  upgrade_oh_my_zsh || curl -L http://install.ohmyz.sh | sh
 fi
 ##cd ~/.oh-my-zsh/custom/plugins
-git clone git://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+update_syntax_highlighting() {
+if [ -e ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting ]; then
+  cd ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+  git checkout master || (echo_color "Please clean or commit any changes in ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting before continuing" && exit 1)
+  git pull origin
+else
+  git clone git://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+fi
+}
+( update_syntax_highlighting )
 ##cd $CURRENT_DIRECTORY
 # forces terminal to use zsh
 #echo "\nzsh && exit 0" >> ~/.bash_profile
@@ -48,7 +68,7 @@ echo_title "END INSTALLING ZSH"
 
 ############ BREW ############
 echo_title "BEGIN INSTALLING BREW"
-if test ! $(which brew); then
+if [ "$(which brew)" = 'brew not found' ]; then
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 brew update
@@ -57,8 +77,7 @@ echo_title "END INSTALLING BREW"
 
 ############ BREW CASK ############
 echo_title "BEGIN INSTALLING BREW CASK"
-brew install caskroom/cask/brew-cask
-brew tap caskroom/versions
+brew tap caskroom/cask
 # configure cask installation in /Applications
 if [ -f "$HOME/.zshrc" ]; then
     contentCask="export HOMEBREW_CASK_OPTS=\"--appdir="$applicationsPrefix"\""
@@ -71,7 +90,7 @@ echo_title "END INSTALLING BREW CASK"
 ############ BREW CASK ############
 
 ############ DIALOG ############
-if test ! $(which dialog); then
+if [ "$(which dialog)" = 'dialog not found' ]; then
   brew install dialog
 fi
 # if [[ $choice == "" ]]
@@ -82,15 +101,15 @@ fi
 ############ DIALOG ############
 
 ############ SOFTWARE ############
-zsh ./bin/installsoftware.sh
+./bin/installssoftware.sh
 ############ SOFTWARE ############
 
 ############ NODE ############
-zsh ./bin/installnode.sh
+./bin/installnode.sh
 ############ NODE ############
 
 ############ GIT ALIASES ############
-zsh ./bin/git-config.sh
+./bin/git-config.sh
 ############# GIT ALIASES ############
 
 ### CONFIGURE ALIASES
