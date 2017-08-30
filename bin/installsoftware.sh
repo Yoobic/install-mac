@@ -106,14 +106,14 @@ fi
 if ([[ $choice == *"GoogleChromeCanary"* ]]); then  
   brew cask install google-chrome-canary --force
 fi
+if ([[ $choice == *"all"* ]] || [[ $choice == *"Dropbox"* ]]); then
+  brew cask install dropbox --force
+fi
 # if ([[ $choice == *"all"* ]] || [[ $choice == *"VirtualBox"* ]]); then
 #   brew cask install virtualbox --force
 # fi
 # if ([[ $choice == *"all"* ]] || [[ $choice == *"Alfred"* ]]); then
 #   brew cask install alfred --force
-# fi
-# if ([[ $choice == *"all"* ]] || [[ $choice == *"Dropbox"* ]]); then
-#   brew cask install dropbox --force
 # fi
 # if ([[ $choice == *"all"* ]] || [[ $choice == *"Skype"* ]]); then
 #   brew cask install skype --force
