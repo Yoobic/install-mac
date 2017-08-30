@@ -1,5 +1,6 @@
-#!/bin/sh
-
+#!/bin/zsh
+source ./echo_utils.sh
+clear
 ############ SET GIT CREDENTIALS ############
 echo_title "START SET GIT CREDENTIALS"
 if [ "$TRAVIS" != "true" ]; then

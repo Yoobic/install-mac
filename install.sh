@@ -1,17 +1,6 @@
 #!/bin/zsh
 
 source ./bin/echo_utils.sh
-export -f echo_color
-export -f echo_title
-export -f inject
-export color_normal
-export color_red
-export color_green
-export color_yellow
-export color_blue
-export color_magenta
-export color_cyan
-export color_white
 clear
 
 # get special folders

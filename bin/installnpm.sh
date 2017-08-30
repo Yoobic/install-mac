@@ -1,4 +1,6 @@
 #!/bin/zsh
+source ./echo_utils.sh
+clear
 
 inquirer_packages() {
   if [ "$TRAVIS" == "true" ]; then

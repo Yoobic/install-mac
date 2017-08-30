@@ -1,4 +1,6 @@
-#!/bin/sh
+#!/bin/zsh
+source ./echo_utils.sh
+clear
 
 ############ NVM ############
 echo_title "BEGIN INSTALL NVM NODE"
