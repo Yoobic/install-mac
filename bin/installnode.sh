@@ -1,5 +1,5 @@
 #!/bin/zsh
-source ./echo_utils.sh
+source echo_utils.sh
 clear
 
 ############ NVM ############
@@ -26,5 +26,5 @@ echo_title "END INSTALLING NVM NODE"
 ############ NVM ############
 
 ############ INSTALL NPM ############
-sh ./installnpm.sh
+zsh installnpm.sh
 ############ INSTALL NPM ############

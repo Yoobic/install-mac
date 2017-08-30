@@ -1,10 +1,10 @@
 #!/bin/zsh
-source ./echo_utils.sh
+source echo_utils.sh
 clear
-
+declare choice
 inquirer_packages() {
-  if [ "$TRAVIS" == "true" ]; then
-    choices="browserify watchify browser-sync cordova cordova-ios cordova-android ionic eslint eslint-plugin-nodeca babel-eslint grunt grunt-cli gulp ios-sim ios-deploy mocha phonegap node-inspector nodemon npm-check-updates loopback-cli"
+  if [ "$TRAVIS" = "true" ]; then
+    choice="browserify watchify browser-sync cordova cordova-ios cordova-android ionic eslint eslint-plugin-nodeca babel-eslint grunt grunt-cli gulp ios-sim ios-deploy mocha phonegap node-inspector nodemon npm-check-updates loopback-cli"
   else
    cmd=(dialog --backtitle "Select your stack" \
               --title "Your stack" --clear \
@@ -31,7 +31,7 @@ inquirer_packages() {
       "loopback-cli" "Loopback CLI" on
     )
 
-    choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+    choice=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
   fi
 }
 
@@ -39,7 +39,7 @@ inquirer_packages
 
 ############ NPM ############
 echo_title "BEGIN INSTALLING NPM GLOBAL PACKAGES"
-npm install -g "${choices[@]}"
+npm install -g "${choice[@]}"
 
 
 if [ -f "$HOME/.zshrc" ]; then

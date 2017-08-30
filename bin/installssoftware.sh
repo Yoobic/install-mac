@@ -1,9 +1,9 @@
 #!/bin/zsh
-source ./echo_utils.sh
+source echo_utils.sh
 clear
-
+declare choice
 inquirer_software() {
-  if [ "$TRAVIS" == "true" ]; then
+  if [ "$TRAVIS" = "true" ]; then
     choice="all"
   else
    cmd=(dialog --backtitle "Select your stack" \
@@ -51,33 +51,33 @@ inquirer_software() {
 }
 
 
-configure_sublime() {
-  ln -s "$applicationsPrefix/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin/subl
-  mkdir "$applicationsSupportPrefix/Sublime Text 3"
-  mkdir "$applicationsSupportPrefix/Sublime Text 3/Packages"
-  mkdir "$applicationsSupportPrefix/Sublime Text 3/Packages/User"
-  mkdir "$applicationsSupportPrefix/Sublime Text 3/Installed Packages"
+# configure_sublime() {
+#   ln -s "$applicationsPrefix/Sublime Text.app/Contents/SharedSupport/bin/subl" /usr/local/bin/subl
+#   mkdir "$applicationsSupportPrefix/Sublime Text 3"
+#   mkdir "$applicationsSupportPrefix/Sublime Text 3/Packages"
+#   mkdir "$applicationsSupportPrefix/Sublime Text 3/Packages/User"
+#   mkdir "$applicationsSupportPrefix/Sublime Text 3/Installed Packages"
 
-  packagecontrol="$applicationsSupportPrefix/Sublime Text 3/Installed Packages/Package Control.sublime-package"
-  curl -L "https://packagecontrol.io/Package%20Control.sublime-package" > "$packagecontrol"
-  printf "\nDownloaded package control\n"
+#   packagecontrol="$applicationsSupportPrefix/Sublime Text 3/Installed Packages/Package Control.sublime-package"
+#   curl -L "https://packagecontrol.io/Package%20Control.sublime-package" > "$packagecontrol"
+#   printf "\nDownloaded package control\n"
 
-  packagesettings="$applicationsSupportPrefix/Sublime Text 3/Packages/User/Package Control.sublime-settings"
-  if [[ -f "$packagesettings" ]]; then
-    cp "$packagesettings" "$packagesettings.old"
-    printf "\nBacked up of package settings file in $packagesettings.old\n"
-  fi
-  curl -L "https://raw.githubusercontent.com/thaiat/generator-sublime/master/templates/sublime/Package%20Control.sublime-settings" > "$packagesettings"
-  printf "\nDownloaded package control settings\n"
+#   packagesettings="$applicationsSupportPrefix/Sublime Text 3/Packages/User/Package Control.sublime-settings"
+#   if [[ -f "$packagesettings" ]]; then
+#     cp "$packagesettings" "$packagesettings.old"
+#     printf "\nBacked up of package settings file in $packagesettings.old\n"
+#   fi
+#   curl -L "https://raw.githubusercontent.com/thaiat/generator-sublime/master/templates/sublime/Package%20Control.sublime-settings" > "$packagesettings"
+#   printf "\nDownloaded package control settings\n"
 
-  preferences="$applicationsSupportPrefix/Sublime Text 3/Packages/User/Preferences.sublime-settings"
-  if [[ -f "$preferences" ]]; then
-    cp "$preferences" "$preferences.old"
-    printf "\nBacked up old preferences file in $preferences.old\n"
-  fi
-  curl -L "https://raw.githubusercontent.com/thaiat/generator-sublime/master/templates/sublime/Preferences.sublime-settings" > "$preferences"
-  printf "\nDownloaded user preferences\n"
-}
+#   preferences="$applicationsSupportPrefix/Sublime Text 3/Packages/User/Preferences.sublime-settings"
+#   if [[ -f "$preferences" ]]; then
+#     cp "$preferences" "$preferences.old"
+#     printf "\nBacked up old preferences file in $preferences.old\n"
+#   fi
+#   curl -L "https://raw.githubusercontent.com/thaiat/generator-sublime/master/templates/sublime/Preferences.sublime-settings" > "$preferences"
+#   printf "\nDownloaded user preferences\n"
+# }
 
 inquirer_software
 
