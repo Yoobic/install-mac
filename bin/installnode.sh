@@ -9,16 +9,13 @@ echo_title "BEGIN INSTALL NVM NODE"
 #curNodeVersion="6"
 #fi
 
-if [[ -f "$HOME/.zshrc" ]]; then
-  PROFILE="$HOME/.zshrc"
-fi
+curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | NODE_VERSION="lts/*" zsh
 
-curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | NODE_VERSION="lts/*" PROFILE="$PROFILE" zsh
+[[ -f "$HOME/.zshrc" ]] && source "$HOME/.zshrc"
 
-if [ -f "$HOME/.zshrc" ]; then
-  source  "$HOME/.zshrc"
-  nvm alias default $curNodeVersion
-fi
+NVM_LTS_VERISON="$(nvm version-remote --lts)"
+nvm install $NVM_LTS_VERISON
+nvm alias default $NVM_LTS_VERISON
 
 echo_title "END INSTALLING NVM NODE"
 ############ NVM ############

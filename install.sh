@@ -58,9 +58,7 @@ echo_title "END INSTALLING ZSH"
 
 ############ BREW ############
 echo_title "BEGIN INSTALLING BREW"
-if [ "$(which brew)" = 'brew not found' ]; then
-  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-fi
+which -s brew || /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew update
 echo_title "END INSTALLING BREW"
 ############ BREW ############
@@ -80,9 +78,7 @@ echo_title "END INSTALLING BREW CASK"
 ############ BREW CASK ############
 
 ############ DIALOG ############
-if [ "$(which dialog)" = 'dialog not found' ]; then
-  brew install dialog
-fi
+which -s dialog || brew install dialog
 # if [[ $choice == "" ]]
 # then
 #   echo "Your stack is empty, nothing to install, exiting...";
