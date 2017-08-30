@@ -1,5 +1,6 @@
 #!/bin/zsh
 
+source ~/.zshrc
 source ./bin/echo_utils.sh
 clear
 
@@ -68,7 +69,7 @@ echo_title "END INSTALLING BREW"
 echo_title "BEGIN INSTALLING BREW CASK"
 brew tap caskroom/cask
 # configure cask installation in /Applications
-if [ -f "$HOME/.zshrc" ]; then
+if [ -f "$HOME/.zshrc" ] && ! grep -qc "HOMEBREW_CASK_OPTS" "$HOME/.zshrc"; then
     contentCask="export HOMEBREW_CASK_OPTS=\"--appdir="$applicationsPrefix"\""
     echo $contentCask
     inject "cask" "$contentCask" "$HOME/.zshrc"

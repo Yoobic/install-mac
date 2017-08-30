@@ -135,7 +135,7 @@ echo_title "END INSTALLING SOFTWARE"
 ############ SOFTWARE ############
 
 # ############ DOCKER ############
-# if ([[ $choice == *"all"* ]] || [[ $choice == *"Docker"* ]]); then
+# if ([[ $choice == *"Docker"* ]]); then
 #   echo_title "BEGIN INSTALLING DOCKER"
 #   brew install docker
 #   brew install boot2docker
@@ -149,23 +149,23 @@ echo_title "END INSTALLING SOFTWARE"
 if ([[ $choice == *"all"* ]] || [[ $choice == *"Mongo"* ]]); then
   echo_title "BEGIN INSTALLING MONGO"
   brew install mongodb
-  mkdir -p /data/db
-  chown -R `whoami` /data
+  # mkdir -p /data/db
+  # chown -R `whoami` /data
   #ln -sfv /usr/local/opt/mongodb/*.plist ~/Library/LaunchAgents
   brew services start mongodb
   echo_title "END INSTALLING MONGO"
 fi
 ############ MONGO ############
 
-############ RETHINKDB ############
-if ([[ $choice == *"all"* ]] || [[ $choice == *"Rethinkdb"* ]]); then
-  echo_title "BEGIN INSTALLING RETHINKDB"
-  brew install rethinkdb
-  #ln -sfv /usr/local/opt/rethinkdb/*.plist ~/Library/LaunchAgents
-  brew services start rethinkdb
-  echo_title "END INSTALLING RETHINKDB"
-fi
-############ RETHINKDB ############
+# ############ RETHINKDB ############
+# if ([[ $choice == *"all"* ]] || [[ $choice == *"Rethinkdb"* ]]); then
+#   echo_title "BEGIN INSTALLING RETHINKDB"
+#   brew install rethinkdb
+#   #ln -sfv /usr/local/opt/rethinkdb/*.plist ~/Library/LaunchAgents
+#   brew services start rethinkdb
+#   echo_title "END INSTALLING RETHINKDB"
+# fi
+# ############ RETHINKDB ############
 
 ############ FONTS ############
 if ([[ $choice == *"all"* ]] || [[ $choice == *"Fonts"* ]]); then
