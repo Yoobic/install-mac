@@ -7,7 +7,8 @@ inquirer_software() {
     choice="all"
   else
     local cmd=(dialog --backtitle "Select your stack" \
-              --title "Your stack" --clear \
+              --title "Your stack" --clear --no-tags \
+              --separate-output --output-separator " " \
               --checklist "Select your favorite softwares  " 20 61 15)
 
     local options=("Dropbox" "Dropbox" on
