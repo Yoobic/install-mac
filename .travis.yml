@@ -13,5 +13,5 @@ install:
 
 script:
   - source ~/.zshrc
-  - nvm use `nvm version-remote --lts`
+  - which -s node || nvm use default
   - zsh test.sh
