@@ -20,10 +20,12 @@ inquirer_software() {
         "iTerm2" "iTerm2" on
         "Mongo" "Mongodb" on
         "Robo3T" "Robo 3T" on
-        "Spectacle1" "Spectacle" on
+        "Skype" "Skype" off
+        "Slack" "Slack" off
+        "Spectacle" "Spectacle" on
         "SublimeText3" "Sublime Text 3" on
-        "VSCode" "VS Code" on
         "TeamViewer" "TeamViewer" on
+        "VSCode" "VS Code" on
     )
 
     choice="$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)"
@@ -63,34 +65,24 @@ inquirer_software
 
 ############ SOFTWARE ############
 echo_title "BEGIN INSTALLING SOFTWARE"
-if ( ! which tree >/dev/null); then
-  brew install tree
-fi 
-if ( ! which wget >/dev/null); then
-  brew install wget
-fi 
-if ( ! which convert >/dev/null); then
-  brew install imagemagick
-fi
-if ( ! which git >/dev/null); then
-  brew install git
-fi
-if ( ! which python >/dev/null); then
-  brew install python
-fi 
+which -s tree || brew install tree
+which -s wget || brew install wget
+which -s magick || brew install imagemagick
+which -s git || brew install git
+which -s python || brew install python
 if ([[ $choice == *"all"* ]] || [[ $choice == *"TeamViewer"* ]]); then
   brew cask install teamviewer --force
 fi
 if ([[ $choice == *"all"* ]] || [[ $choice == *"Spectacle"* ]]); then
   brew cask install spectacle --force
 fi
-if ([[ $choice == *"all"* ]] || [[ $choice == *"flycut"* ]]); then
+if ([[ $choice == *"all"* ]] || [[ $choice == *"Flycut"* ]]); then
   brew cask install flycut --force
 fi
 if ([[ $choice == *"all"* ]] || [[ $choice == *"SublimeText3"* ]]); then
   brew cask install sublime-text --force
-  #configure_sublime
-  echo_color "When running sublime, it will look broken, ignore it. Press OK on alerts and wait for sublime to install its packages. Press ctrl+\` to see the installation log." $color_yellow
+  # configure_sublime
+  # echo_color "When running sublime, it will look broken, ignore it. Press OK on alerts and wait for sublime to install its packages. Press ctrl+\` to see the installation log." $color_yellow
 fi
 if ([[ $choice == *"all"* ]] || [[ $choice == *"iTerm2"* ]]); then
   brew cask install iterm2 --force
@@ -104,23 +96,23 @@ fi
 if ([[ $choice == *"all"* ]] || [[ $choice == *"GoogleChrome"* ]]); then  
   brew cask install google-chrome --force
 fi
+if ([[ $choice == *"all"* ]] || [[ $choice == *"Dropbox"* ]]); then
+  brew cask install dropbox --force
+fi
+if ([[ $choice == *"all"* ]] || [[ $choice == *"Skype"* ]]); then
+  brew cask install skype --force
+fi
 if ([[ $choice == *"GoogleChromeCanary"* ]]); then  
   brew cask install google-chrome-canary --force
 fi
-if ([[ $choice == *"all"* ]] || [[ $choice == *"Dropbox"* ]]); then
-  brew cask install dropbox --force
+if ([[ $choice == *"Slack"* ]]); then
+  brew cask install slack --force
 fi
 # if ([[ $choice == *"all"* ]] || [[ $choice == *"VirtualBox"* ]]); then
 #   brew cask install virtualbox --force
 # fi
 # if ([[ $choice == *"all"* ]] || [[ $choice == *"Alfred"* ]]); then
 #   brew cask install alfred --force
-# fi
-# if ([[ $choice == *"all"* ]] || [[ $choice == *"Skype"* ]]); then
-#   brew cask install skype --force
-# fi
-# if ([[ $choice == *"all"* ]] || [[ $choice == *"Slack"* ]]); then
-#   brew cask install slack --force
 # fi
 #if ([[ $choice == *"all"* ]] || [[ $choice == *"LimeChat"* ]]); then  
 #  brew cask install limechat --force
@@ -182,3 +174,19 @@ if ([[ $choice == *"all"* ]] || [[ $choice == *"Fonts"* ]]); then
   echo_title "END INSTALLING FONTS"
 fi
 ############ FONTS ############
+
+
+############ CONFIGURE ALIASES ############
+if [ -f "$HOME/.zshrc" ]; then
+    contentAlias="alias rethinkdbstart=\"brew services start rethinkdb\""
+    contentAlias=$contentAlias"\n"
+    contentAlias=$contentAlias"alias rethinkdbstop=\"brew services stop rethinkdb\""
+    contentAlias=$contentAlias"\n"
+    contentAlias=$contentAlias"alias mongodbstart=\"brew services start  mongodb\""
+    contentAlias=$contentAlias"\n"
+    contentAlias=$contentAlias"alias mongodbstop=\"brew services stop mongodb\""
+  
+    inject "alias" "$contentAlias" "$HOME/.zshrc"
+    source "$HOME/.zshrc"
+fi
+############ CONFIGURE ALIASES ############

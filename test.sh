@@ -86,7 +86,7 @@ check_program "npm-check-updates"
 check_program "cordova"
 check_program "phonegap"
 # check_program "boot2docker"
-check_program "loopback-cli"
+check_program "lb"
 
 grep -qc 'bsync' ~/.gitconfig || ( echo_color "Could not find bsync in gitconfig" && exit 1)
 

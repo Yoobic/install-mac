@@ -100,19 +100,4 @@ cd bin
 ############ GIT ALIASES ############
 cd ..
 
-### CONFIGURE ALIASES
-if [ -f "$HOME/.zshrc" ]; then
-    contentAlias="alias rethinkdbstart=\"brew services start rethinkdb\""
-    contentAlias=$contentAlias"\n"
-    contentAlias=$contentAlias"alias rethinkdbstop=\"brew services stop rethinkdb\""
-    contentAlias=$contentAlias"\n"
-    contentAlias=$contentAlias"alias mongodbstart=\"brew services start  mongodb\""
-    contentAlias=$contentAlias"\n"
-    contentAlias=$contentAlias"alias mongodbstop=\"brew services stop mongodb\""
-  
-    inject "alias" "$contentAlias" "$HOME/.zshrc"
-    source "$HOME/.zshrc"
-fi
-###
-
 brew cleanup
