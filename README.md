@@ -1,4 +1,4 @@
-#install-mac
+# install-mac
 [![Build Status](https://travis-ci.org/Yoobic/install-mac.svg?branch=master)](https://travis-ci.org/Yoobic/install-mac)
 
 ## Description
