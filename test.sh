@@ -11,7 +11,7 @@ color_cyan="\x1B[36m"
 color_white="\x1B[37m"
 
 
-if [ "$TRAVIS" == "true" ]; then
+if [ "$TRAVIS" = "true" ]; then
     app_folder="/Applications"
 else
     app_folder="/Applications"
@@ -27,6 +27,8 @@ check_file(){
     #echo_color "checking file: $2"
     if [ ! -z "$2" ]; then
        echo_color "checking file: $2"
+    else
+       echo_color "checking file: $1"
     fi
     if [ -e "$1" ]; then
         echo_color "File found: $1" $color_green
@@ -35,18 +37,24 @@ check_file(){
         exit 1
     fi
 }
+
+check_program(){
+    echo_color "checking program: $1"
+    which -s $1 && echo_color "File found: $1" $color_green || ( echo_color "File not found: $1" $color_red && exit 1 )
+}
 echo_color "Start test" $color_yellow
 
 cat ~/.zshrc
 
-check_file "$(which zsh)" "zsh" # check zsh version
-check_file "$(which brew)" "brew" # check brew version
-check_file "$(which tree)" "tree" # check tree version
-check_file "$(which wget)" "wget" # check wget version
-check_file "$(which convert)" "convert" # check imagemagick version
-check_file "$(which git)" "git" # check git version
-check_file "$(which python)" "python" # check python version
-check_file "$(which subl)" "subl" # check Sublime Text version
+check_program "zsh" # check that zsh is in $PATH
+check_program "brew" # check that brew is in $PATH
+check_program "tree" # check that tree is in $PATH
+check_program "wget" # check that wget is in $PATH
+check_program "convert" # check that imagemagick is in $PATH
+check_program "git" # check that git is in $PATH
+check_program "python" # check that python is in $PATH
+check_program "subl" # check that Sublime Text is in $PATH
+check_program "code" # check that VSCode is in $PATH
 check_file $HOME/.zshrc
 check_file "$app_folder/Sublime Text.app" # check Sublime Text software
 check_file "$app_folder/iTerm.app" # check iTerm2 software
@@ -56,28 +64,30 @@ check_file "$app_folder/Flycut.app" # check iTerm2 software
 check_file "$app_folder/Dropbox.app" # check Dropbox software
 check_file "$app_folder/Skype.app" # check Skype software
 check_file "$app_folder/VirtualBox.app" # check VirtualBox software
-check_file "$app_folder/Slack.app" # check Slack software
+# check_file "$app_folder/Slack.app" # check Slack software
 check_file "$app_folder/Google Chrome.app" # check Google Chrome software
 #check_file "$app_folder/LimeChat.app" # check Lime Chat software
 check_file "$app_folder/TeamViewer.app" # check Team Viewer software
 check_file "$app_folder/Robomongo.app" # check Robomongo software
 
-check_file "$(which npm)" "npm"
-check_file "$(which eslint)" "eslint"
-check_file "$(which gulp)" "gulp"
-check_file "$(which grunt)" "grunt"
-check_file "$(which browser-sync)" "browser-sync"
-#check_file "$(which browsersync)" "browsersync"
-check_file "$(which karma)" "karma"
-check_file "$(which mocha)" "mocha"
-check_file "$(which browserify)" "browserify"
-check_file "$(which watchify)" "watchify"
-check_file "$(which nodemon)" "nodemon"
-check_file "$(which node-inspector)" "node-inspector"
-check_file "$(which npm-check-updates)" "npm-check-updates"
-check_file "$(which cordova)" "cordova"
-check_file "$(which phonegap)" "phonegap"
-check_file "$(which boot2docker)" "boot2docker"
-check_file "$(which slc)" "strongloop"
+check_program "npm"
+check_program "eslint"
+# check_program "gulp"
+# check_program "grunt"
+check_program "browser-sync"
+check_program "browsersync"
+# check_program "karma"
+check_program "mocha"
+check_program "browserify"
+check_program "watchify"
+check_program "nodemon"
+# check_program "node-inspector"
+check_program "npm-check-updates"
+check_program "cordova"
+check_program "phonegap"
+# check_program "boot2docker"
+check_program "lb"
+
+grep -qc 'bsync' ~/.gitconfig || ( echo_color "Could not find bsync in gitconfig" && exit 1)
 
 echo_color "End test" $color_yellow
