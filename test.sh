@@ -11,7 +11,7 @@ color_cyan="\x1B[36m"
 color_white="\x1B[37m"
 
 
-if [ "$TRAVIS" == "true" ]; then
+if [ "$TRAVIS" = "true" ]; then
     app_folder="/Applications"
 else
     app_folder="/Applications"
