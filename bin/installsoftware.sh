@@ -19,6 +19,7 @@ inquirer_software() {
         "GoogleChromeCanary" "Google Chrome Canary" off
         "iTerm2" "iTerm2" on
         "Mongo" "Mongodb" on
+        "Postgresql" "Postgresql" on
         "Robo3T" "Robo 3T" on
         "Skype" "Skype" off
         "Slack" "Slack" off
@@ -150,6 +151,19 @@ if ([[ $choice == *"all"* ]] || [[ $choice == *"Mongo"* ]]); then
   echo_title "END INSTALLING MONGO"
 fi
 ############ MONGO ############
+
+############ POSTGRESQL ############
+if ([[ $choice == *"all"* ]] || [[ $choice == *"Postgresql"* ]]); then
+  echo_title "BEGIN INSTALLING POSTGRESQL"
+  brew install postgres
+  brew services start postgresql
+  createuser --superuser -d root
+  createdb postgresqldb
+  echo_title "END INSTALLING POSTGRESQL"
+fi
+############ POSTGRESQL ############
+
+brew install postgres
 
 # ############ RETHINKDB ############
 # if ([[ $choice == *"all"* ]] || [[ $choice == *"Rethinkdb"* ]]); then
