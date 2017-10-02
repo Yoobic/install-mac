@@ -163,8 +163,6 @@ if ([[ $choice == *"all"* ]] || [[ $choice == *"Postgresql"* ]]); then
 fi
 ############ POSTGRESQL ############
 
-brew install postgres
-
 # ############ RETHINKDB ############
 # if ([[ $choice == *"all"* ]] || [[ $choice == *"Rethinkdb"* ]]); then
 #   echo_title "BEGIN INSTALLING RETHINKDB"
