@@ -68,7 +68,7 @@ check_file "$app_folder/VirtualBox.app" # check VirtualBox software
 check_file "$app_folder/Google Chrome.app" # check Google Chrome software
 #check_file "$app_folder/LimeChat.app" # check Lime Chat software
 check_file "$app_folder/TeamViewer.app" # check Team Viewer software
-check_file "$app_folder/Robomongo.app" # check Robomongo software
+check_file "$app_folder/Robo 3T.app" # check Robomongo software
 
 check_program "npm"
 check_program "eslint"
