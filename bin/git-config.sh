@@ -44,6 +44,13 @@ git config --global alias.l 'log --graph --pretty=format:"%C(yellow)%h%C(cyan)%d
 # ls: log with commited files
 git config --global alias.ls 'log --pretty=format:"%C(yellow)%h%C(cyan)%d%C(green) %s %C(white)- %an, %ar%Creset" --decorate --numstat'
 
+# via http://stackoverflow.com/questions/5188320/how-can-i-get-a-list-of-git-branches-ordered-by-most-recent-commit
+# recent-branches: see info about recently changed branches
+git config --global alias.recent-branches '"!git for-each-ref --count=15 --sort=-committerdate refs/heads/ --format='"'"'%(refname:short)'"'"'"'
+
+# lsb: list detailed information about local branches, sorted by most recent commit
+git config --global alias.lsb '"!lsb() { git for-each-ref --sort=-committerdate refs/heads/ --format='"'"'%(HEAD) %(color:red)%(objectname:short)%(color:reset)|%(color:yellow)%(refname:short)%(color:reset)|%(contents:subject)|%(authorname)|(%(color:green)%(committerdate:relative)%(color:reset))'"'"' | column -ts'"'"'|'"'"'; }; lsb"'
+
 # d: git diff with word colors
 git config --global alias.d 'diff --color-words'
 

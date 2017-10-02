@@ -50,7 +50,6 @@ Finally, when prompted you should input your github credentials to ensure that y
 * Skype
 * Spectacle
 * Sublime Text 3
-* VirtualBox
 
 ### Npm Packages installed:
 * browserify
