@@ -14,6 +14,7 @@ This repo contains a simple bash script that installs the dev tools for a mac.
     sudo dscl localonly -changei /Local/Default/Users/root UserShell 1 $(which zsh)
     ```
 * Restart the computer
+* Make sure you download XCode from the app store
 
 ## Installation
 To install the package run the following commands:
