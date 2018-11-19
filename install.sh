@@ -98,6 +98,11 @@ cd bin
 ############ GIT ALIASES ############
 ./git-config.sh
 ############ GIT ALIASES ############
+
+############ VSCODE ##############
+./vscode.sh
+############ VSCODE ##############
+
 cd ..
 
 brew cleanup
