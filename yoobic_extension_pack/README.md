@@ -2,20 +2,20 @@
 
 ----
 ## This Pack contains the following extensions
-*   Angular Language Service as a TypeScript plugin
-*   Auto Rename Tag
-*   Beautify css/sass/scss/less
-*   Bracket Pair Colorizer
-*   Cucumber (Gherkin) Full Support
-*   GitLens - Git supercharged
-*   Import Cost
-*   IntelliSense for CSS class names in HTML
-*   Material Icon Theme
-*   Npm Dependency
-*   SVG Viewer
-*   TODO Highlight
-*   TSLint
-*   VS Live Share
+*   [Angular Language Service as a TypeScript plugin](https://github.com/cyrilletuzi/vscode-typescript-angular-plugin)
+*   [Auto Rename Tag](https://github.com/formulahendry/vscode-auto-rename-tag)
+*   [Beautify css/sass/scss/less](https://github.com/mike7515/code-beautifier)
+*   [Bracket Pair Colorizer](https://github.com/CoenraadS/BracketPair)
+*   [Cucumber (Gherkin) Full Support](https://github.com/alexkrechik/VSCucumberAutoComplete)
+*   [GitLens - Git supercharged](https://github.com/eamodio/vscode-gitlens)
+*   [Import Cost](https://github.com/wix/import-cost)
+*   [IntelliSense for CSS class names in HTML](https://github.com/Zignd/HTML-CSS-Class-Completion)
+*   [Material Icon Theme](https://github.com/PKief/vscode-material-icon-theme)
+*   [Npm Dependency](https://github.com/leftstick/vscode-npm-dependency)
+*   [SVG Viewer](https://github.com/cssho/vscode-svgviewer)
+*   [TODO Highlight](https://github.com/wayou/vscode-todo-highlight)
+*   [TSLint](https://github.com/Microsoft/vscode-tslint)
+*   [VS Live Share](https://github.com/MicrosoftDocs/live-share)
 
 ----
 ## How to generate the Pack
@@ -27,7 +27,7 @@
 
     vsce package
 
--> For more information : [vsce](https://code.visualstudio.com/docs/extensions/publish-extension) 
+-> For more information : [vsce](https://code.visualstudio.com/docs/extensions/publish-extension)
 
 ----
 ## How to install the Pack in VS code
