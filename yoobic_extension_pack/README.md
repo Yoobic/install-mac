@@ -1,4 +1,4 @@
-# Welcome to Yoobic's Extention Pack
+# Welcome to Yoobic's Extension Pack
 
 ----
 ## This Pack contains the following extensions
