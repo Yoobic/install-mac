@@ -1,0 +1,41 @@
+{
+    "name": "extensionpack",
+    "displayName": "Yoobic Extension Pack",
+    "description": "This is Yoobic's own extension pack !",
+    "icon": "yoobic.jpeg",
+    "galleryBanner": {
+        "color": "#1E1E1E",
+        "theme": "dark"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Yoobic/install-mac"
+    },
+    "version": "1.0.0",
+    "publisher": "yoobic",
+    "keywords": [
+        "yoobic"
+    ],
+    "engines": {
+        "vscode": "^1.29.0"
+    },
+    "categories": [
+        "Extension Packs"
+    ],
+    "extensionDependencies": [
+        "cyrilletuzi.typescript-angular-plugin",
+        "formulahendry.auto-rename-tag",
+        "michelemelluso.code-beautifier",
+        "coenraads.bracket-pair-colorizer",
+        "alexkrechik.cucumberautocomplete",
+        "eamodio.gitlens",
+        "wix.vscode-import-cost",
+        "zignd.html-css-class-completion",
+        "pkief.material-icon-theme",
+        "howardzuo.vscode-npm-dependency",
+        "cssho.vscode-svgviewer",
+        "wayou.vscode-todo-highlight",
+        "eg2.tslint",
+        "ms-vsliveshare.vsliveshare"
+    ]
+}
