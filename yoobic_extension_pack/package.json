@@ -36,6 +36,7 @@
         "cssho.vscode-svgviewer",
         "wayou.vscode-todo-highlight",
         "eg2.tslint",
-        "ms-vsliveshare.vsliveshare"
+        "ms-vsliveshare.vsliveshare",
+        "angular.ng-template"
     ]
 }
