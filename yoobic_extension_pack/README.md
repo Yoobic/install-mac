@@ -2,6 +2,7 @@
 
 ----
 ## This Pack contains the following extensions
+*   [Angular Language Service](https://github.com/angular/vscode-ng-language-service)
 *   [Angular Language Service as a TypeScript plugin](https://github.com/cyrilletuzi/vscode-typescript-angular-plugin)
 *   [Auto Rename Tag](https://github.com/formulahendry/vscode-auto-rename-tag)
 *   [Beautify css/sass/scss/less](https://github.com/mike7515/code-beautifier)
