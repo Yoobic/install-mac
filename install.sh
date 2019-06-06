@@ -77,6 +77,10 @@ fi
 echo_title "END INSTALLING BREW CASK"
 ############ BREW CASK ############
 
+############ GCLOUD ############
+which -s glcoud || curl https://sdk.cloud.google.com | bash
+############ GCLOUD ############
+
 ############ DIALOG ############
 which -s dialog || brew install dialog
 which -s hub || brew install hub
