@@ -78,6 +78,11 @@ echo_title "END INSTALLING BREW CASK"
 ############ BREW CASK ############
 
 ############ GCLOUD ############
+CLOUDSDK_CORE_DISABLE_PROMPTS=1
+CLOUDSDK_INSTALL_DIR=/Users/travis/
+
+curl https://sdk.cloud.google.com | bash
+
 which -s glcoud || curl https://sdk.cloud.google.com | bash
 ############ GCLOUD ############
 
