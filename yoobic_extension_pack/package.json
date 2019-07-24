@@ -11,7 +11,7 @@
         "type": "git",
         "url": "https://github.com/Yoobic/install-mac"
     },
-    "version": "1.0.0",
+    "version": "1.0.1",
     "publisher": "yoobic",
     "keywords": [
         "yoobic"
@@ -23,6 +23,8 @@
         "Extension Packs"
     ],
     "extensionDependencies": [
+        "aaron-bond.better-comments",
+        "chakrounanas.turbo-console-log",
         "cyrilletuzi.typescript-angular-plugin",
         "formulahendry.auto-rename-tag",
         "michelemelluso.code-beautifier",
@@ -35,8 +37,8 @@
         "howardzuo.vscode-npm-dependency",
         "cssho.vscode-svgviewer",
         "wayou.vscode-todo-highlight",
-        "eg2.tslint",
         "ms-vsliveshare.vsliveshare",
-        "angular.ng-template"
+        "angular.ng-template",
+        "ms-vscode.vscode-typescript-tslint-plugin"
     ]
 }

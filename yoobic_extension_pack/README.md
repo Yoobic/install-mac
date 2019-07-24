@@ -6,6 +6,7 @@
 *   [Angular Language Service as a TypeScript plugin](https://github.com/cyrilletuzi/vscode-typescript-angular-plugin)
 *   [Auto Rename Tag](https://github.com/formulahendry/vscode-auto-rename-tag)
 *   [Beautify css/sass/scss/less](https://github.com/mike7515/code-beautifier)
+*   [Better comments](https://github.com/aaron-bond/better-comments)
 *   [Bracket Pair Colorizer](https://github.com/CoenraadS/BracketPair)
 *   [Cucumber (Gherkin) Full Support](https://github.com/alexkrechik/VSCucumberAutoComplete)
 *   [GitLens - Git supercharged](https://github.com/eamodio/vscode-gitlens)
@@ -15,7 +16,8 @@
 *   [Npm Dependency](https://github.com/leftstick/vscode-npm-dependency)
 *   [SVG Viewer](https://github.com/cssho/vscode-svgviewer)
 *   [TODO Highlight](https://github.com/wayou/vscode-todo-highlight)
-*   [TSLint](https://github.com/Microsoft/vscode-tslint)
+*   [TSLint](https://github.com/Microsoft/vscode-typescript-tslint-plugin)
+*   [Turbo console log](https://github.com/Chakroun-Anas/turbo-console-log)
 *   [VS Live Share](https://github.com/MicrosoftDocs/live-share)
 
 ----
