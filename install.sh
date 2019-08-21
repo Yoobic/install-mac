@@ -78,12 +78,14 @@ echo_title "END INSTALLING BREW CASK"
 ############ BREW CASK ############
 
 ############ GCLOUD ############
+echo_title "BEGIN INSTALLING GCLOUD SDK"
 export CLOUDSDK_CORE_DISABLE_PROMPTS=1
 export CLOUDSDK_INSTALL_DIR=/Users/travis/
 
-curl https://sdk.cloud.google.com | bash
-
 which -s gcloud || curl https://sdk.cloud.google.com | bash
+gcloud components update
+echo_title "END INSTALLING GCLOUD SDK"
+
 ############ GCLOUD ############
 
 ############ DIALOG ############
@@ -93,7 +95,7 @@ which -s hub || brew install hub
 # then
 #   echo "Your stack is empty, nothing to install, exiting...";
 #   exit
-# fi 
+# fi
 ############ DIALOG ############
 cd bin
 ############ SOFTWARE ############
