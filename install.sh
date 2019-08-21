@@ -83,7 +83,7 @@ export CLOUDSDK_INSTALL_DIR=/Users/travis/
 
 curl https://sdk.cloud.google.com | bash
 
-which -s glcoud || curl https://sdk.cloud.google.com | bash
+which -s gcloud || curl https://sdk.cloud.google.com | bash
 ############ GCLOUD ############
 
 ############ DIALOG ############
