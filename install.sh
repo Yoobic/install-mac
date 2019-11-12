@@ -65,7 +65,7 @@ echo_title "END INSTALLING BREW"
 
 ############ BREW CASK ############
 echo_title "BEGIN INSTALLING BREW CASK"
-brew tap caskroom/cask
+brew tap homebrew/cask-cask
 # configure cask installation in /Applications
 if [ -f "$HOME/.zshrc" ] && ! grep -qc "HOMEBREW_CASK_OPTS" "$HOME/.zshrc"; then
     contentCask="export HOMEBREW_CASK_OPTS=\"--appdir="$applicationsPrefix"\""
