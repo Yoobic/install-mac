@@ -46,7 +46,7 @@ Finally, when prompted you should input your github credentials to ensure that y
 * Fonts (m-plus, clear-sans, roboto)
 * Google Chrome
 * iTerm2
-* Mongodb
+* Mongodb (latest version of mongodb-community (4.x) and mongodb-community-shell for remote operations)
 * Robo 3T
 * Skype
 * Spectacle

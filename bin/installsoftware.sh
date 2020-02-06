@@ -143,11 +143,13 @@ echo_title "END INSTALLING SOFTWARE"
 ############ MONGO ############
 if ([[ $choice == *"all"* ]] || [[ $choice == *"Mongo"* ]]); then
   echo_title "BEGIN INSTALLING MONGO"
-  brew install mongodb
-  # mkdir -p /data/db
-  # chown -R `whoami` /data
-  #ln -sfv /usr/local/opt/mongodb/*.plist ~/Library/LaunchAgents
-  brew services start mongodb
+  brew tap mongodb/brew
+  #local operations
+  brew install mongodb-community
+  #remote operations
+  brew install mongodb-community-shell
+  #start the service
+  #brew services start mongodb-community
   echo_title "END INSTALLING MONGO"
 fi
 ############ MONGO ############
