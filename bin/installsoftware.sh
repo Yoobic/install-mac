@@ -190,6 +190,18 @@ fi
 ############ FONTS ############
 
 
+############ IOS-DEPLOY ############
+if ([[ $choice == *"all"* ]] || [[ $choice == *"ios-deploy"* ]]); then
+  echo_title "BEGIN INSTALLING IOS-DEPLOY"
+  #for previous version
+  sudo npm uninstall -g ios-deploy
+  #install via homebrew
+  brew install ios-deploy
+  echo_title "END INSTALLING IOS-DEPLOY"
+fi
+############ IOS-DEPLOY ############
+
+
 ############ CONFIGURE ALIASES ############
 if [ -f "$HOME/.zshrc" ]; then
     contentAlias="alias rethinkdbstart=\"brew services start rethinkdb\""
