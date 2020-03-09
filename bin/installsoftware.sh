@@ -144,10 +144,8 @@ echo_title "END INSTALLING SOFTWARE"
 if ([[ $choice == *"all"* ]] || [[ $choice == *"Mongo"* ]]); then
   echo_title "BEGIN INSTALLING MONGO"
   brew tap mongodb/brew
-  #local operations
-  brew install mongodb-community
-  #remote operations
-  brew install mongodb-community-shell
+  brew install mongodb-community@4.0.15
+  export PATH=$PATH:/usr/local/Cellar/mongodb-community@4.0/4.0.15/bin/
   #start the service
   #brew services start mongodb-community
   echo_title "END INSTALLING MONGO"
