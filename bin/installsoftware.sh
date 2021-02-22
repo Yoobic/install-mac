@@ -21,12 +21,13 @@ inquirer_software() {
         "Mongo" "Mongodb" on
         "Postgresql" "Postgresql" on
         "Robo3T" "Robo 3T" on
-        "Skype" "Skype" off
         "Slack" "Slack" off
         "Spectacle" "Spectacle" on
-        "SublimeText3" "Sublime Text 3" on
+        "Zoom" "Zoom" on
         "TeamViewer" "TeamViewer" on
         "VSCode" "VS Code" on
+        "SublimeText3" "Sublime Text 3" on
+        "Postman" "Postman" on
     )
 
     choice="$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)"
@@ -72,60 +73,66 @@ which -s magick || brew install imagemagick
 which -s git || brew install git
 which -s python || brew install python
 if ([[ $choice == *"all"* ]] || [[ $choice == *"TeamViewer"* ]]); then
-  brew cask install teamviewer --force
+  brew install --cask teamviewer --force
 fi
 if ([[ $choice == *"all"* ]] || [[ $choice == *"Spectacle"* ]]); then
-  brew cask install spectacle --force
+  brew install --cask spectacle --force
 fi
 if ([[ $choice == *"all"* ]] || [[ $choice == *"Flycut"* ]]); then
-  brew cask install flycut --force
+  brew install --cask flycut --force
 fi
 if ([[ $choice == *"all"* ]] || [[ $choice == *"SublimeText3"* ]]); then
-  brew cask install sublime-text --force
+  brew install --cask sublime-text --force
   # configure_sublime
   # echo_color "When running sublime, it will look broken, ignore it. Press OK on alerts and wait for sublime to install its packages. Press ctrl+\` to see the installation log." $color_yellow
 fi
 if ([[ $choice == *"all"* ]] || [[ $choice == *"iTerm2"* ]]); then
-  brew cask install iterm2 --force
+  brew install --cask iterm2 --force
 fi
 if ([[ $choice == *"all"* ]] || [[ $choice == *"VSCode"* ]]); then
-  brew cask install visual-studio-code --force
+  brew install --cask visual-studio-code --force
+fi
+if ([[ $choice == *"all"* ]] || [[ $choice == *"Postman"* ]]); then
+  brew install --cask postman --force
+fi
+if ([[ $choice == *"all"* ]] || [[ $choice == *"Zoom"* ]]); then
+  brew install --cask zoom --force
 fi
 if ([[ $choice == *"all"* ]] || [[ $choice == *"Robo3T"* ]]); then
-  brew cask install robo-3t --force
+  brew install --cask robo-3t --force
 fi
 if ([[ $choice == *"all"* ]] || [[ $choice == *"GoogleChrome"* ]]); then  
-  brew cask install google-chrome --force
+  brew install --cask google-chrome --force
 fi
 if ([[ $choice == *"all"* ]] || [[ $choice == *"Dropbox"* ]]); then
-  brew cask install dropbox --force
+  brew install --cask dropbox --force
 fi
 if ([[ $choice == *"all"* ]] || [[ $choice == *"Skype"* ]]); then
-  brew cask install skype --force
+  brew install --cask skype --force
 fi
 if ([[ $choice == *"GoogleChromeCanary"* ]]); then  
-  brew cask install google-chrome-canary --force
+  brew install --cask google-chrome-canary --force
 fi
 if ([[ $choice == *"Slack"* ]]); then
-  brew cask install slack --force
+  brew install --cask slack --force
 fi
 # if ([[ $choice == *"all"* ]] || [[ $choice == *"VirtualBox"* ]]); then
-#   brew cask install virtualbox --force
+#   brew install --cask virtualbox --force
 # fi
 # if ([[ $choice == *"all"* ]] || [[ $choice == *"Alfred"* ]]); then
-#   brew cask install alfred --force
+#   brew install --cask alfred --force
 # fi
 #if ([[ $choice == *"all"* ]] || [[ $choice == *"LimeChat"* ]]); then  
-#  brew cask install limechat --force
+#  brew install --cask limechat --force
 #fi
-#brew cask install spotify
-#brew cask install u-torrent
-#brew cask install source-tree
-#brew cask install mou
-#brew cask install filezilla
-#brew cask install kaleidoscope
-#brew cask install firefox-aurora
-#brew cask install opera-next
+#brew install --cask spotify
+#brew install --cask u-torrent
+#brew install --cask source-tree
+#brew install --cask mou
+#brew install --cask filezilla
+#brew install --cask kaleidoscope
+#brew install --cask firefox-aurora
+#brew install --cask opera-next
 echo_title "END INSTALLING SOFTWARE"
 ############ SOFTWARE ############
 
@@ -184,7 +191,7 @@ if ([[ $choice == *"all"* ]] || [[ $choice == *"Fonts"* ]]); then
     font-roboto
   )
   brew tap caskroom/fonts 
-  brew cask install ${fonts[@]}
+  brew install --cask ${fonts[@]}
   echo_title "END INSTALLING FONTS"
 fi
 ############ FONTS ############
@@ -192,13 +199,13 @@ fi
 
 ############ CONFIGURE ALIASES ############
 if [ -f "$HOME/.zshrc" ]; then
-    contentAlias="alias rethinkdbstart=\"brew services start rethinkdb\""
+    contentAlias="alias postgresqlstart=\"brew services start postgresql\""
     contentAlias=$contentAlias"\n"
-    contentAlias=$contentAlias"alias rethinkdbstop=\"brew services stop rethinkdb\""
+    contentAlias=$contentAlias"alias postgresqlstop=\"brew services stop postgresql\""
     contentAlias=$contentAlias"\n"
-    contentAlias=$contentAlias"alias mongodbstart=\"brew services start  mongodb\""
+    contentAlias=$contentAlias"alias mongodbstart=\"brew services start mongodb-community\""
     contentAlias=$contentAlias"\n"
-    contentAlias=$contentAlias"alias mongodbstop=\"brew services stop mongodb\""
+    contentAlias=$contentAlias"alias mongodbstop=\"brew services stop mongodb-community\""
   
     inject "alias" "$contentAlias" "$HOME/.zshrc"
     source "$HOME/.zshrc"

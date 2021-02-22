@@ -64,17 +64,17 @@ echo_title "END INSTALLING BREW"
 ############ BREW ############
 
 ############ BREW CASK ############
-echo_title "BEGIN INSTALLING BREW CASK"
-brew tap homebrew/cask-cask
-# configure cask installation in /Applications
-if [ -f "$HOME/.zshrc" ] && ! grep -qc "HOMEBREW_CASK_OPTS" "$HOME/.zshrc"; then
-    contentCask="export HOMEBREW_CASK_OPTS=\"--appdir="$applicationsPrefix"\""
-    echo $contentCask
-    inject "cask" "$contentCask" "$HOME/.zshrc"
-    source "$HOME/.zshrc"
-fi
+# echo_title "BEGIN INSTALLING BREW CASK"
+# brew tap homebrew/cask-cask
+# # configure cask installation in /Applications
+# if [ -f "$HOME/.zshrc" ] && ! grep -qc "HOMEBREW_CASK_OPTS" "$HOME/.zshrc"; then
+#     contentCask="export HOMEBREW_CASK_OPTS=\"--appdir="$applicationsPrefix"\""
+#     echo $contentCask
+#     inject "cask" "$contentCask" "$HOME/.zshrc"
+#     source "$HOME/.zshrc"
+# fi
 
-echo_title "END INSTALLING BREW CASK"
+# echo_title "END INSTALLING BREW CASK"
 ############ BREW CASK ############
 
 ############ GCLOUD ############
