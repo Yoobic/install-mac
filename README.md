@@ -14,7 +14,7 @@ This repo contains a simple bash script that installs the dev tools for a mac.
     sudo dscl localonly -changei /Local/Default/Users/root UserShell 1 $(which zsh)
     ```
 * Restart the computer
-* Make sure you download XCode from the app store
+* Make sure you download XCode from the app store. If you did not have it installed before - install it, launch it, accept the user agreement. Then restart your computer.
 
 ## Installation
 To install the package run the following commands:
@@ -25,6 +25,17 @@ git clone https://github.com/Yoobic/install-mac.git
 cd install-mac
 ./install.sh
 ```
+
+### Troubleshooting: if you get an error: 
+```
+xcode-select: error: tool 'xcodebuild' requires Xcode, but active developer directory '/Library/Developer/CommandLineTools' is a command line tools instance
+```
+running `./install.sh` after xcode was installed, run: 
+```
+sudo xcode-select -s /Applications/Xcode.app/Contents/Develope
+```
+
+
 
 The script will then start downloading & installing the software. When prompted, use the keyboard to select which applications and global npm packages you want to install, or just hit **[Enter]** with `<Ok>` selected to take the defaults.
 
