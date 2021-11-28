@@ -26,7 +26,7 @@ if [ "$CI" != "true" ]; then
     exit 1
   fi
   xcodeVersion=`xcodebuild -version | grep Xcode | cut -d' ' -f2 | cut -d'.' -f1`
-  if [ "$xcodeVersion" -lt "6" ]; then
+  if [ "$xcodeVersion" -lt "11" ]; then
     echo_color "Your Xcode version is lower than 6. Please install the latest Xcode version from the App Store." $color_red
     exit 1
   fi
@@ -66,7 +66,7 @@ echo_title "END INSTALLING BREW"
 echo_title "BEGIN INSTALLING GCLOUD SDK"
 curl https://sdk.cloud.google.com > gcloud-install.sh
 which -s gcloud || bash gcloud-install.sh --disable-prompts
-gcloud components update
+# gcloud components update
 echo_title "END INSTALLING GCLOUD SDK"
 
 ## Dialog
