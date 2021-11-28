@@ -1,0 +1,23 @@
+name: Test
+
+on: 
+  push:
+env:
+  CI: true
+jobs: 
+  test: 
+    name: test
+    runs-on: macos-latest
+    steps: 
+    - uses: actions/checkout@v2
+    - name: install
+      run: zsh install.sh
+    - name: source
+      run: source ~/.zshrc
+    - name: node
+      run: which -s node || nvm use default
+    - name: test
+      run: zsh test.sh
+
+
+

@@ -11,7 +11,7 @@ color_cyan="\x1B[36m"
 color_white="\x1B[37m"
 
 
-if [ "$TRAVIS" = "true" ]; then
+if [ "$CI" = "true" ]; then
     app_folder="/Applications"
 else
     app_folder="/Applications"
@@ -71,22 +71,6 @@ check_file "$app_folder/TeamViewer.app" # check Team Viewer software
 check_file "$app_folder/Robo 3T.app" # check Robomongo software
 
 check_program "npm"
-check_program "eslint"
-# check_program "gulp"
-# check_program "grunt"
-check_program "browser-sync"
-check_program "browsersync"
-# check_program "karma"
-check_program "mocha"
-check_program "browserify"
-check_program "watchify"
-check_program "nodemon"
-# check_program "node-inspector"
-check_program "npm-check-updates"
-check_program "cordova"
-check_program "phonegap"
-# check_program "boot2docker"
-check_program "lb"
 
 grep -qc 'bsync' ~/.gitconfig || ( echo_color "Could not find bsync in gitconfig" && exit 1)
 

@@ -14,14 +14,13 @@ curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | NODE_V
 
 source ~/.zshrc
 [ -s "$HOME/.nvm/nvm.sh" ] && . "$HOME/.nvm/nvm.sh"  # This loads nvm
-
-NVM_LTS_VERISON="$(nvm version-remote --lts)"
-nvm install $NVM_LTS_VERISON
-nvm alias default $NVM_LTS_VERISON
+nvm install --lts --alias=default
 
 echo_title "END INSTALLING NVM NODE"
 ############ NVM ############
 
 ############ INSTALL NPM ############
-zsh ./installnpm.sh
+npm install -g loopback-cli
+npm install -g nodemon
+npm install -g server
 ############ INSTALL NPM ############
