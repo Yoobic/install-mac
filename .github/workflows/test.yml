@@ -18,8 +18,8 @@ jobs:
     - uses: actions/checkout@v2
     - name: install
       run: zsh install.sh
-    - name: source
-      run: source ~/.zshrc
+#    - name: source
+#      run: source ~/.zshrc
     - name: node
       run: which -s node || nvm use default
     - name: test
