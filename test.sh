@@ -55,14 +55,12 @@ check_program "git" # check that git is in $PATH
 check_program "python" # check that python is in $PATH
 check_program "subl" # check that Sublime Text is in $PATH
 check_program "code" # check that VSCode is in $PATH
-check_file $HOME/.zshrc
-check_file "$app_folder/Sublime Text.app" # check Sublime Text software
+# check_file $HOME/.zshrc
 check_file "$app_folder/iTerm.app" # check iTerm2 software
 check_file "$app_folder/Spectacle.app" # check iTerm2 software
 check_file "$app_folder/Flycut.app" # check iTerm2 software
 #check_file "$app_folder/alfred.app" # check iTerm2 software
 check_file "$app_folder/Dropbox.app" # check Dropbox software
-check_file "$app_folder/Skype.app" # check Skype software
 # check_file "$app_folder/VirtualBox.app" # check VirtualBox software
 # check_file "$app_folder/Slack.app" # check Slack software
 check_file "$app_folder/Google Chrome.app" # check Google Chrome software
