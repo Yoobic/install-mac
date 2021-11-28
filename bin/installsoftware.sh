@@ -161,12 +161,12 @@ fi
 ############ FONTS ############
 if ([[ $choice == *"all"* ]] || [[ $choice == *"Fonts"* ]]); then
   echo_title "BEGIN INSTALLING FONTS"
+  brew install svn
   fonts=(
-    font-m-plus
     font-clear-sans
     font-roboto
   )
-  brew tap caskroom/fonts 
+  brew tap homebrew/cask-fonts 
   brew install  ${fonts[@]}
   echo_title "END INSTALLING FONTS"
 fi
