@@ -81,6 +81,9 @@ which -s python || brew install python
 ## GH (Github cli)
 which -s gh || brew install gh
 
+which -s tree || brew install tree
+which -s wget || brew install wget
+which -s magick || brew install imagemagick
 
 cd bin
 ############ SOFTWARE ############

@@ -12,23 +12,24 @@ inquirer_software() {
               --separate-output --output-separator " " \
               --checklist "Select your favorite softwares  " 20 61 15)
 
-    local options=("Dropbox" "Dropbox" on
-        "Flycut" "Flycut (Keyboard manager)" on
-        "Fonts" "Fonts (m-plus, clear-sans, roboto)" on
+    local options=(
+        "VSCode" "VS Code" on
+        "Slack" "Slack" on
         "GoogleChrome" "Google Chrome" on
-        "GoogleChromeCanary" "Google Chrome Canary" off
+        "Zoom" "Zoom" on
         "iTerm2" "iTerm2" on
+        "Postman" "Postman (API Tool)" on
+        "Robo3T" "Robo 3T (Mongo UI)" on
         "Mongo" "Mongodb (DB)" on
         "Postgresql" "Postgresql (DB)" on
-        "Robo3T" "Robo 3T (Mongo UI)" on
-        "Slack" "Slack" on
-        "Spectacle" "Spectacle (Layout Manager)" on
-        "Zoom" "Zoom" on
-        "TeamViewer" "TeamViewer" off
-        "VSCode" "VS Code" on
-        "SublimeText3" "Sublime Text 3 (Text editor)" off
-        "Postman" "Postman (API Tool)" on
         "Heroku" "Heroku CLI" off
+        "Dropbox" "Dropbox" on
+        "Flycut" "Flycut (Keyboard manager)" on
+        "Fonts" "Fonts (m-plus, clear-sans, roboto)" on
+        "GoogleChromeCanary" "Google Chrome Canary" off
+        "Spectacle" "Spectacle (Layout Manager)" on
+        "TeamViewer" "TeamViewer" off
+        "SublimeText3" "Sublime Text 3 (Text editor)" off
     )
 
     choice="$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)"
@@ -37,11 +38,29 @@ inquirer_software() {
 
 inquirer_software
 
-############ SOFTWARE ############
-echo_title "BEGIN INSTALLING SOFTWARE"
-which -s tree || brew install tree
-which -s wget || brew install wget
-which -s magick || brew install imagemagick
+############ Applications ############
+echo_title "BEGIN INSTALLING APPLICATIONS"
+if ([[ $choice == *"all"* ]] || [[ $choice == *"VSCode"* ]]); then
+  brew install  visual-studio-code --force
+fi
+if ([[ $choice == *"Slack"* ]]); then
+  brew install  slack --force
+fi
+if ([[ $choice == *"all"* ]] || [[ $choice == *"Postman"* ]]); then
+  brew install  postman --force
+fi
+if ([[ $choice == *"all"* ]] || [[ $choice == *"Zoom"* ]]); then
+  brew install  zoom --force
+fi
+if ([[ $choice == *"all"* ]] || [[ $choice == *"Robo3T"* ]]); then
+  brew install  robo-3t --force
+fi
+if ([[ $choice == *"all"* ]] || [[ $choice == *"GoogleChrome"* ]]); then  
+  brew install  google-chrome --force
+fi
+if ([[ $choice == *"all"* ]] || [[ $choice == *"Dropbox"* ]]); then
+  brew install  dropbox --force
+fi
 if ([[ $choice == *"all"* ]] || [[ $choice == *"TeamViewer"* ]]); then
   brew install  teamviewer --force
 fi
@@ -59,30 +78,10 @@ fi
 if ([[ $choice == *"all"* ]] || [[ $choice == *"iTerm2"* ]]); then
   brew install iterm2 --force
 fi
-if ([[ $choice == *"all"* ]] || [[ $choice == *"VSCode"* ]]); then
-  brew install  visual-studio-code --force
-fi
-if ([[ $choice == *"all"* ]] || [[ $choice == *"Postman"* ]]); then
-  brew install  postman --force
-fi
-if ([[ $choice == *"all"* ]] || [[ $choice == *"Zoom"* ]]); then
-  brew install  zoom --force
-fi
-if ([[ $choice == *"all"* ]] || [[ $choice == *"Robo3T"* ]]); then
-  brew install  robo-3t --force
-fi
-if ([[ $choice == *"all"* ]] || [[ $choice == *"GoogleChrome"* ]]); then  
-  brew install  google-chrome --force
-fi
-if ([[ $choice == *"all"* ]] || [[ $choice == *"Dropbox"* ]]); then
-  brew install  dropbox --force
-fi
 if ([[ $choice == *"GoogleChromeCanary"* ]]); then  
   brew install  google-chrome-canary --force
 fi
-if ([[ $choice == *"Slack"* ]]); then
-  brew install  slack --force
-fi
+
 
 echo_title "END INSTALLING SOFTWARE"
 ############ SOFTWARE ############
