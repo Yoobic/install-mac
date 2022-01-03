@@ -4,7 +4,7 @@ source ./echo_utils.sh
 clear
 ############ SET GIT CREDENTIALS ############
 echo_title "START SET GIT CREDENTIALS"
-if [ "$TRAVIS" != "true" ]; then
+if [ "$CI" != "true" ]; then
   echo_color "Please enter your user name at Github:"
   read username < /dev/tty
   echo_color "Please enter your email at Github:"

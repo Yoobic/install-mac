@@ -25,10 +25,8 @@
     "extensionDependencies": [
         "aaron-bond.better-comments",
         "chakrounanas.turbo-console-log",
-        "cyrilletuzi.typescript-angular-plugin",
         "formulahendry.auto-rename-tag",
         "michelemelluso.code-beautifier",
-        "coenraads.bracket-pair-colorizer",
         "alexkrechik.cucumberautocomplete",
         "eamodio.gitlens",
         "wix.vscode-import-cost",
@@ -39,7 +37,6 @@
         "wayou.vscode-todo-highlight",
         "ms-vsliveshare.vsliveshare",
         "angular.ng-template",
-        "ms-vscode.vscode-typescript-tslint-plugin",
         "ms-vscode.vscode-typescript-next"
     ]
 }

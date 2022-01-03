@@ -9,7 +9,7 @@ cd ~/Library/Application\ Support/Code/User
 
 rm -rf keybindings.json
 touch keybindings.json
-echo "// Place your key bindings in this file to overwrite the defaults
+echo "// Place your key bindings in this file to override the defaults
 [
     {
         \"key\": \"shift+cmd+h\",

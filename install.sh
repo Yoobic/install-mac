@@ -20,13 +20,13 @@ echo_color "Applications: $applicationsPrefix" $color_yellow
 printf "\n"
 
 ############ Xcode ############
-if [ "$TRAVIS" != "true" ]; then
+if [ "$CI" != "true" ]; then
   if ! xcodebuild -version; then
     echo_color "Please install the latest Xcode version from the App Store." $color_red
     exit 1
   fi
   xcodeVersion=`xcodebuild -version | grep Xcode | cut -d' ' -f2 | cut -d'.' -f1`
-  if [ "$xcodeVersion" -lt "6" ]; then
+  if [ "$xcodeVersion" -lt "11" ]; then
     echo_color "Your Xcode version is lower than 6. Please install the latest Xcode version from the App Store." $color_red
     exit 1
   fi
@@ -35,7 +35,7 @@ fi
 
 ############ ZSH ############
 echo_title "BEGIN INSTALLING ZSH"
-if [ "$TRAVIS" != "true" ]; then
+if [ "$CI" != "true" ]; then
   upgrade_oh_my_zsh || curl -L http://install.ohmyz.sh | sh
 fi
 ##cd ~/.oh-my-zsh/custom/plugins
@@ -56,63 +56,48 @@ fi
 echo_title "END INSTALLING ZSH"
 ############ ZSH ############
 
-############ BREW ############
+## BREW
 echo_title "BEGIN INSTALLING BREW"
 which -s brew || /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew update
 echo_title "END INSTALLING BREW"
-############ BREW ############
 
-############ BREW CASK ############
-# echo_title "BEGIN INSTALLING BREW CASK"
-# brew tap homebrew/cask-cask
-# # configure cask installation in /Applications
-# if [ -f "$HOME/.zshrc" ] && ! grep -qc "HOMEBREW_CASK_OPTS" "$HOME/.zshrc"; then
-#     contentCask="export HOMEBREW_CASK_OPTS=\"--appdir="$applicationsPrefix"\""
-#     echo $contentCask
-#     inject "cask" "$contentCask" "$HOME/.zshrc"
-#     source "$HOME/.zshrc"
-# fi
-
-# echo_title "END INSTALLING BREW CASK"
-############ BREW CASK ############
-
-############ GCLOUD ############
+## GCLOUD
 echo_title "BEGIN INSTALLING GCLOUD SDK"
-export CLOUDSDK_CORE_DISABLE_PROMPTS=1
-export CLOUDSDK_INSTALL_DIR=/Users/travis/
-
-which -s gcloud || curl https://sdk.cloud.google.com | bash
-gcloud components update
+curl https://sdk.cloud.google.com > gcloud-install.sh
+which -s gcloud || bash gcloud-install.sh --disable-prompts
+# gcloud components update
 echo_title "END INSTALLING GCLOUD SDK"
 
-############ GCLOUD ############
-
-############ DIALOG ############
+## Dialog
 which -s dialog || brew install dialog
-which -s hub || brew install hub
-# if [[ $choice == "" ]]
-# then
-#   echo "Your stack is empty, nothing to install, exiting...";
-#   exit
-# fi
-############ DIALOG ############
+
+## GIT
+which -s git || brew install git
+
+## Python
+which -s python || brew install python
+
+## GH (Github cli)
+which -s gh || brew install gh
+
+which -s tree || brew install tree
+which -s wget || brew install wget
+which -s magick || brew install imagemagick
+
 cd bin
 ############ SOFTWARE ############
 ./installsoftware.sh
 ############ SOFTWARE ############
 
-############ NODE ############
-./installnode.sh
-############ NODE ############
+############ VSCODE ##############
+./vscode.sh
+############ VSCODE ##############
 
 ############ GIT ALIASES ############
 ./git-config.sh
 ############ GIT ALIASES ############
 
-############ VSCODE ##############
-./vscode.sh
-############ VSCODE ##############
 
 cd ..
 

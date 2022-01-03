@@ -44,31 +44,41 @@ Finally, when prompted you should input your github credentials to ensure that y
 ### Infrastructure Software installed:
 * brew
 * git
-* imagemagick
 * nvm (node)
 * ohmyzsh
 * python
+* gh (Github CLI)
 * tree
 * wget
+* imagemagick
 
-### Software installed:
+### Applications installed:
+* VSCode
+* Slack
+* Google Chrome
+* Zoom
+* iTerm2
+* Postman
+* Robo 3T
+* Mongo
+* Postgresql
+* Heroku CLI
 * Dropbox
 * Flycut
-* Fonts (m-plus, clear-sans, roboto)
-* Google Chrome
-* iTerm2
-* Mongodb (latest version of mongodb-community (4.x) and mongodb-community-shell for remote operations)
-* Robo 3T
-* Skype
+* Fonts (clear-sans, roboto)
+* Google Chrome Canary
 * Spectacle
+* TeamViewer
 * Sublime Text 3
 
-### Npm Packages installed:
-* browserify
-* browser-sync
-* cordova
-* eslint
-* mocha
-* node-inspector
-* nodemon
-* npm-check-updates
+## Extras
+
+You can run specific scripts directly as follow: 
+
+- To setup Yoobic git aliases: 
+
+`curl -L https://raw.githubusercontent.com/thaiat/generator-sublime/master/templates/app/bin/git-config.sh | sh` 
+
+- To install nvm and core npm packages: 
+`curl -L https://raw.githubusercontent.com/thaiat/generator-sublime/master/templates/app/bin/installnode.sh | sh`
+
