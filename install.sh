@@ -58,7 +58,33 @@ echo_title "END INSTALLING ZSH"
 
 ## BREW
 echo_title "BEGIN INSTALLING BREW"
-which -s brew || /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+which -s brew
+IS_BREW_INSTALLED="$?"
+if [[ "${IS_BREW_INSTALLED}" -ne 0 ]]
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+  UNAME_MACHINE="$(/usr/bin/uname -m)"
+  if [[ "${UNAME_MACHINE}" == "arm64" ]] then
+    HOMEBREW_PREFIX="/opt/homebrew"
+    case "${SHELL}" in
+    */bash*)
+      if [[ -r "${HOME}/.bash_profile" ]]
+      then
+        shell_profile="${HOME}/.bash_profile"
+      else
+        shell_profile="${HOME}/.profile"
+      fi
+      ;;
+    */zsh*)
+      shell_profile="${HOME}/.zprofile"
+      ;;
+    *)
+      shell_profile="${HOME}/.profile"
+      ;;
+    esac
+    echo 'eval "\$(${HOMEBREW_PREFIX}/bin/brew shellenv)"' >> ${shell_profile}
+    eval "\$(${HOMEBREW_PREFIX}/bin/brew shellenv)"
+  fi
 brew update
 echo_title "END INSTALLING BREW"
 
